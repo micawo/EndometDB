@@ -1,0 +1,41 @@
+<?php
+// change the correct settings here and rename this to constants.php
+
+define("SQL_HOST", "localhost");
+define("SQL_USER", "root");
+define("SQL_PASSWORD", changethis);
+define("SQL_DATABASE", changethis);
+
+define("ENDOMETDB_HOST", "localhost");
+define("ENDOMETDB_DBNAME", changethis);
+define("ENDOMETDB_USER", changethis);
+define("ENDOMETDB_PASSWORD", changethis);
+
+define("AGENT_SALT", changethis);
+define("PASSWD_SALT", changethis);
+
+define("URL", changethis);
+define("ROOT", "/var/www/endometdb/");
+define("VIEWS", "/var/www/endometdb/view/");
+define("MGMT", "/var/www/endometdb/mgmt/");
+define("INCLUDE_DIR", "/var/www/endometdb/include/");
+define("JSON", "/var/www/endometdb/json/");
+
+define('RSERVE_HOST', 'localhost');
+define('RSERVE_PORT', 6311);
+
+$usrcheck = new EndometDBSQL();
+$logged   = $usrcheck->verifyLogin();
+
+define("LOGGED_IN", ($logged->id > 0));
+define("IS_ADMIN", ($logged->admin));
+define("NAME", ($logged->name));
+define("USER_ID", $logged->id);
+
+unset($usrcheck);
+unset($logged);
+
+//  update user set authentication_string=PASSWORD("endometdb12A123!") where User='root';
+// ALTER USER 'root'@'localhost' IDENTIFIED WITH mysql_native_password BY 'endometdb12A123!';
+
+?>

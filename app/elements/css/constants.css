@@ -1,0 +1,9 @@
+:root {
+
+	--green: #30c9af;
+	--light-green: rgba(48, 201, 175, 0.05);
+	--border: #e0e0e0;
+	--border-light: #ebebeb;
+	--brown: rgb(83, 87, 86);
+	--brown-light: rgba(83, 87, 86, 0.05);
+}

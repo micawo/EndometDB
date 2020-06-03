@@ -1,0 +1,33 @@
+@media screen and (max-width: 1640px) {
+
+    #wrapper {
+        
+        margin: 0 20px 20px 20px;
+    }
+    
+    .analysis_tabs, .patient_tabs {
+        
+        margin-left: 20px;
+    }
+}
+
+@media screen and (max-width: 1024px) {
+
+    #filters, .analysis_tabs .filter_tabs:first-of-type, .patient_tabs .filter_tabs:first-of-type {
+        
+        width: 320px;
+    }    
+}
+
+@media screen and (max-width: 980px) {
+
+    #wrapper {
+        
+        width: 980px;
+    }    
+    
+    #nav {
+        
+        width: 1000px;
+    }
+}

@@ -1,0 +1,338 @@
+[
+    {
+        "title": "Microarray Data"
+    },
+    {
+        "title": "Patient and controls analyzed using microarray",
+        "data": [
+            {
+                "title": "Patients",
+                "value": 122
+            },
+            {
+                "title": "Controls",
+                "value": 45
+        }]        
+    
+    }, {
+        
+        "title": "Samples analyzed by tissue type",
+        "data": [
+            {
+                "title": "Endometrium",
+                "value": 135
+            }, {
+                "title": "Peritoneum",
+                "value": 60
+            }, {
+                "title": "Red Peritoneal Lesion",
+                "value": 27
+            }, {
+                "title": "Black Peritoneal Lesion",
+                "value": 27
+            }, {
+                "title": "White Peritoneal Lesion",
+                "value": 22
+            }, {
+                "title": "Ovarian Endometrioma",
+                "value": 28
+            }, {
+                "title": "Deep Endometriosis",
+                "value": 86
+            }                                                                       
+        ]
+        
+    }, {
+        
+        "title": "Hormonal Status of analyzed samples",
+        "data": [
+            {
+                "title": "Patients",
+                "value": 51
+            }, 
+            {
+                "title": "Control",
+                "value": 18
+            }                                                                    
+        ]
+        
+    }, {
+        "title": "All data"
+    }, {
+        
+        "title": "",
+        "data": [
+            {
+                "title": "Patients",
+                "value": 316
+            }, 
+            {
+                "title": "Control",
+                "value": 114
+            }                                                                    
+        ]
+        
+    }, {
+        
+        "title": "Samples by tissue type",
+        "data": [
+            {
+                "title": "Blood Serum",
+                "value": 433
+            }, 
+            {
+                "title": "Blood EDTA",
+                "value": 383
+            },  
+            {
+                "title": "Endometrium",
+                "value": 420
+            }, 
+            {
+                "title": "Peritoneal Flush",
+                "value": 378
+            },  
+            {
+                "title": "Peritoneum",
+                "value": 377
+            },
+            {
+                "title": "Red Peritoneal Lesion",
+                "value": 62
+            }, 
+            {
+                "title": "Black Peritoneal Lesion",
+                "value": 94
+            },
+            {
+                "title": "White Peritoneal Lesion",
+                "value": 75
+            },
+            {
+                "title": "Ovarian Endometrioma",
+                "value": 160
+            },
+            {
+                "title": "Deep Endometriosis",
+                "value": 245
+            }                                                                                
+        ]    
+    }, {
+        
+        "title": "Hormonal Medication Status",
+        "data": [
+            {
+                "title": "Patients",
+                "value": 204
+            }, 
+            {
+                "title": "Control",
+                "value": 38
+            }                                                                    
+        ]
+        
+    }, {
+        "title": "Illumina Microarray"
+    }, {
+        
+        "title": "Patient and controls analyzed using microarray",
+        "data": [
+            {
+                "title": "Patients",
+                "value": 122
+            }, 
+            {
+                "title": "Control",
+                "value": 45
+            }                                                                    
+        ]    
+        
+    }, {
+        
+        "title": "Samples analyzed by tissue type",
+        "data": [
+            {
+                "title": "Endometrium",
+                "value": 135
+            }, {
+                "title": "Peritoneum",
+                "value": 60
+            }, {
+                "title": "Red Peritoneal Lesion",
+                "value": 27
+            }, {
+                "title": "Black Peritoneal Lesion",
+                "value": 27
+            }, {
+                "title": "White Peritoneal Lesion",
+                "value": 22
+            }, {
+                "title": "Ovarian Endometrioma",
+                "value": 28
+            }, {
+                "title": "Deep Endometriosis",
+                "value": 86
+            }                                                                       
+        ]
+        
+    }, {
+        
+        "title": "Hormonal Status of analyzed samples",
+        "data": [
+            {
+                "title": "Patients",
+                "value": 51
+            }, 
+            {
+                "title": "Control",
+                "value": 18
+            }                                                                    
+        ]    
+            
+    }, {
+        "title": "Cytokine"
+    }, {
+        
+        "title": "Cytokine measured in Serum",
+        "data": [
+            {
+                "title": "Patients",
+                "value": 276
+            }, 
+            {
+                "title": "Control",
+                "value": 78
+            }                                                                    
+        ]        
+    
+    }, {
+        
+        "title": "Hormonal Status",
+        "data": [
+            {
+                "title": "Patients",
+                "value": 58
+            }, 
+            {
+                "title": "Control",
+                "value": 22
+            }                                                                    
+        ]        
+        
+    }, {
+        "title": "Metabolites"
+    }, {
+        
+        "title": "Metabolites measured in Serum",
+        "data": [
+            {
+                "title": "Patients",
+                "value": 141
+            }, 
+            {
+                "title": "Control",
+                "value": 66
+            }                                                                    
+        ]    
+            
+    }, {
+        
+        "title": "Metabolites measured in Peritoneal fluids",
+        "data": [
+            {
+                "title": "Patients",
+                "value": 75
+            }, 
+            {
+                "title": "Control",
+                "value": 43
+            }                                                                    
+        ]  
+              
+    }, {
+        
+        "title": "Hormonal Status",
+        "data": [
+            {
+                "title": "Patients",
+                "value": 54
+            }, 
+            {
+                "title": "Control",
+                "value": 22
+            }                                                                    
+        ]  
+              
+    }, {
+        "title": "Hormone Concentration"
+    }, {
+        
+        "title": "Patient and controls hormone concentration from serum",
+        "data": [
+            {
+                "title": "Patients",
+                "value": 309
+            }, 
+            {
+                "title": "Control",
+                "value": 82
+            }                                                                    
+        ]        
+        
+    }, {
+        
+        "title": "Patient and controls hormone concentration from tissue",
+        "data": [
+            {
+                "title": "Patients",
+                "value": 69
+            }, 
+            {
+                "title": "Control",
+                "value": 7
+            }                                                                    
+        ]    
+            
+    }, {
+        
+        "title": "Samples analyzed by tissue type",
+        "data": [
+            {
+                "title": "Endometrium",
+                "value": 35
+            }, {
+                "title": "Peritoneum",
+                "value": 62
+            }, {
+                "title": "Red Peritoneal Lesion",
+                "value": 1
+            }, {
+                "title": "Black Peritoneal Lesion",
+                "value": 4
+            }, {
+                "title": "White Peritoneal Lesion",
+                "value": 4
+            }, {
+                "title": "Ovarian Endometrioma",
+                "value": 26
+            }, {
+                "title": "Deep Endometriosis",
+                "value": 25
+            }                                                                       
+        ]
+                
+    }, {
+        
+        "title": "Hormonal Status of analyzed samples",
+        "data": [
+            {
+                "title": "Patients",
+                "value": 155
+            }, 
+            {
+                "title": "Control",
+                "value": 32
+            }                                                                    
+        ]                
+    }           
+]

@@ -1,0 +1,689 @@
+[
+    {
+        "type": "patient_data",
+        "title": "Patient data",
+        "icon": "fa-user",
+        "form": [
+            {
+                "class": "four",
+                "inputs": [
+                    {
+                        "name": "age",
+                        "title": "Age (yrs)",
+                        "type": "number",
+                        "step": 1
+                    },
+                    {
+                        "name": "height",
+                        "title": "Height (cm)",
+                        "type": "number",
+                        "step": 1
+                    },
+                    {
+                        "name": "weight",
+                        "title": "Weight (kg)",
+                        "type": "number",
+                        "step": 1
+                    },
+                    {
+                        "name": "bmi",
+                        "title": "BMI",
+                        "type": "number",
+                        "step": 0.1
+                    }                                                          
+                ]
+            
+            }, {
+                "class": "two",
+                "inputs": [
+                    {
+                        "name": "attending_physician",
+                        "title": "Attending Physician",
+                        "type": "select",
+                        "options": []
+                    },
+                    {
+                        "name": "surgery_date",
+                        "title": "Surgery date",
+                        "type": "date"
+                    }                    
+                ]    
+            }, {
+                "class": "two",
+                "inputs": [
+                    {
+                        "name": "category",
+                        "title": "Category",
+                        "type": "select",
+                        "options": [
+                            {
+                                "value": 0,
+                                "title": "None"
+                            }, {    
+                                "value": 266,
+                                "title": "Patient"
+                            }, {
+                                "value": 267,
+                                "title": "Control"
+                            }
+                        ]
+                    },
+                    {
+                        "name": "confirmed_disease",
+                        "title": "Confirmed disease",
+                        "type": "select",
+                        "options": [
+                            {
+                                "value": 0,
+                                "title": "None"
+                            }, {
+                                "value": 48,
+                                "title": "Healthy"
+                            }, {
+                                "value": 49,
+                                "title": "Endometriosis"
+                            }, {
+                                "value": 50,
+                                "title": "Unexpected endometriosis"
+                            }, {
+                                "value": 51,
+                                "title": "No findings"
+                            }
+                        ]
+                    }                    
+                ]    
+            }, {
+                "class": "three",
+                "inputs": [
+                    {
+                        "name": "stage",
+                        "title": "Stage",
+                        "type": "select",
+                        "options": [
+                            {
+                                "value": 0,
+                                "title": "None"
+                            }, {
+                                "value": 351,
+                                "title": "Stage I"
+                            }, {
+                                "value": 352,
+                                "title": "Stage II"
+                            }, {
+                                "value": 353,
+                                "title": "Stage III"
+                            }, {
+                                "value": 354,
+                                "title": "Stage IV"
+                            }, {
+                                "value": 355,
+                                "title": "No disease"
+                            }
+                        ]
+                    },
+                    {
+                        "name": "confirmed_disease_date",
+                        "title": "Confirmed disease date",
+                        "type": "date"
+                    },
+                    {
+                        "name": "recurrence_status",
+                        "title": "Recurrence status",
+                        "type": "text"
+                    }                                             
+                ]    
+            }, {
+                "class": "three",
+                "inputs": [
+                    {
+                        "name": "cycle_phase",
+                        "title": "Cycle Phase",
+                        "type": "text"
+                    },
+                    {
+                        "name": "cycle_length",
+                        "title": "Cycle length",
+                        "type": "select",
+                        "options": []
+                    },
+                    {
+                        "name": "last_menstrual_date",
+                        "title": "Last menstrual date",
+                        "type": "date"
+                    }                                             
+                ]    
+            }, {
+                "class": "three",
+                "inputs": [
+                    {
+                        "name": "hormonal_status",
+                        "title": "Hormonal status",
+                        "type": "text"
+                    },
+                    {
+                        "name": "med_group",
+                        "title": "Med. Group",
+                        "type": "text"
+                    },
+                    {
+                        "name": "med_name",
+                        "title": "Med. Name",
+                        "type": "text"
+                    }                                             
+                ]    
+            }, {
+                "class": "one",
+                "inputs": [
+                    {
+                        "name": "save_patient_data",
+                        "title": "Save patient data",
+                        "type": "button"
+                    }                                          
+                ]    
+            }  
+        ]
+    }, {
+        "type": "samples",
+        "title": "Samples",
+        "icon": "fa-flask",
+        "cloner": true,
+        "cloner_button": "Add sample",
+        "form": [
+            {
+                "class": "one",
+                "inputs": [
+                    {
+                        "name": "sample",
+                        "title": "Sample",
+                        "type": "select",
+                        "options": []
+                    }
+                ]
+            },
+            {
+                "class": "four",
+                "inputs": [
+                    {
+                        "name": "sample_date",
+                        "title": "Sample date",
+                        "type": "date"
+                    },
+                    {
+                        "name": "time_until_frozen",
+                        "title": "Time until frozen",
+                        "type": "select",
+                        "options": []
+                    },
+                    {
+                        "name": "medium",
+                        "title": "Fixation",
+                        "type": "select",
+                        "options": []                        
+                    },
+                    {
+                        "name": "vials",
+                        "title": "Vials",
+                        "type": "select",
+                        "options": []                        
+                    }                                                          
+                ]
+            }, {
+                "class": "one",
+                "inputs": [
+                    {
+                        "name": "notes",
+                        "title": "Notes",
+                        "type": "text"
+                    }
+                ]
+            }
+        ]
+    }, {
+        "type": "histology",
+        "title": "Histology",
+        "icon": "fa-male",
+        "cloner": true,
+        "cloner_button": "Add histology",
+        "form": [
+            {
+                "class": "one",
+                "inputs": [
+                    {
+                        "name": "sample",
+                        "title": "Sample",
+                        "type": "select",
+                        "options": []                        
+                    }
+                ]
+            }, {
+                "class": "two",
+                "inputs": [
+                    {
+                        "name": "date",
+                        "title": "Date",
+                        "type": "date"
+                    },
+                    {
+                        "name": "person",
+                        "title": "Person",
+                        "type": "select",
+                        "options": []                        
+                    }                                                         
+                ]
+            }, {
+                "class": "three",
+                "inputs": [
+                    {
+                        "name": "lesion",
+                        "title": "Lesion",
+                        "type": "select",
+                        "options": []                         
+                    },
+                    {
+                        "name": "class",
+                        "title": "Class",
+                        "type": "select",
+                        "options": []                        
+                    },
+                    {
+                        "name": "phase",
+                        "title": "Phase",
+                        "type": "select",
+                        "options": []                        
+                    }                                                                             
+                ]
+            }, {
+                "class": "one",
+                "inputs": [
+                    {
+                        "name": "subclass",
+                        "title": "Subclass",
+                        "type": "select",
+                        "options": []
+                    }                                                                          
+                ]
+            }
+        ]
+    }, {
+        "type": "biomarker",
+        "title": "Biomarker",
+        "icon": "fa-genderless",
+        "cloner": true,
+        "cloner_button": "Add sample",
+        "form": [
+            {
+                "class": "one",
+                "inputs": [
+                    {
+                        "name": "sample",
+                        "title": "Sample",
+                        "type": "select",
+                        "options": []
+                    }
+                ]
+            }, {
+                "class": "three",
+                "inputs": [
+                    {
+                        "name": "analyte_name",
+                        "title": "Analyte name",
+                        "type": "text"
+                    },
+                    {
+                        "name": "mean_value",
+                        "title": "Mean value",
+                        "type": "text"
+                    },
+                    {
+                        "name": "unit",
+                        "title": "Unit",
+                        "type": "text"
+                    }                                                                             
+                ]
+            }
+        ]
+    }, {
+        "type": "visits_symptoms",
+        "title": "Visits/Symptoms",
+        "icon": "fa-user-md",
+        "cloner": true,
+        "cloner_button": "Add visit",
+        "form": [
+            {
+                "class": "three",
+                "inputs": [
+                    {
+                        "name": "visit_date",
+                        "title": "Visit date",
+                        "type": "date"
+                    },
+                    {
+                        "name": "visit",
+                        "title": "Visit",
+                        "type": "select",
+                        "options": [
+                            {
+                                "value": 0,
+                                "title": "Select"
+                            },                            
+                            {
+                                "value": 1,
+                                "title": "First visit"
+                            }, {
+                                "value": 2,
+                                "title": "Post op: 3 months"
+                            }, {
+                                "value": 3,
+                                "title": "6 months"
+                            }, {
+                                "value": 3,
+                                "title": "1 year"
+                            }
+                        ]                        
+                    },
+                    {
+                        "name": "visit_reason",
+                        "title": "Visit reason",
+                        "type": "select",
+                        "options": [
+                            {
+                                "value": 0,
+                                "title": "Select"
+                            },                                
+                            {
+                                "value": 1,
+                                "title": "Pain"
+                            }, {
+                                "value": 2,
+                                "title": "Pregnancy wish"
+                            }, {
+                                "value": 3,
+                                "title": "Routine investigation"
+                            }
+                        ]
+                    }                      
+                    
+                ]
+            }, {
+                "class": "one",
+                "inputs": [
+                    {
+                        "title": "Symptoms",
+                        "type": "title"
+                    }
+                ]
+            }, {
+                "class": "two",
+                "inputs": [
+                    {
+                        "name": "menstrual_pain",
+                        "title": "Menstrual pain",
+                        "type": "checkbox"
+                    },
+                    {
+                        "name": "menstrual_pain_score",
+                        "title": "Pain score",
+                        "type": "select",
+                        "options": [
+                            {
+                                "value": 0,
+                                "title": "Select"
+                            },                                
+                            {
+                                "value": 1,
+                                "title": 1
+                            }, {
+                                "value": 2,
+                                "title": 2
+                            }, {
+                                "value": 3,
+                                "title": 3
+                            }, {
+                                "value": 4,
+                                "title": 4
+                            }, {
+                                "value": 5,
+                                "title": 5
+                            }, {
+                                "value": 6,
+                                "title": 6
+                            }, {
+                                "value": 7,
+                                "title": 7
+                            }, {
+                                "value": 8,
+                                "title": 8
+                            }, {
+                                "value": 9,
+                                "title": 9
+                            }, {
+                                "value": 10,
+                                "title": 10
+                            }
+                        ]
+                    }                                                                         
+                ]
+            }, {
+                "class": "two",
+                "inputs": [
+                    {
+                        "name": "intercourse_pain",
+                        "title": "Intercourse pain",
+                        "type": "checkbox"
+                    },
+                    {
+                        "name": "intercourse_pain_score",
+                        "title": "Pain score",
+                        "type": "select",
+                        "options": [
+                            {
+                                "value": 0,
+                                "title": "Select"
+                            },                                
+                            {
+                                "value": 1,
+                                "title": 1
+                            }, {
+                                "value": 2,
+                                "title": 2
+                            }, {
+                                "value": 3,
+                                "title": 3
+                            }, {
+                                "value": 4,
+                                "title": 4
+                            }, {
+                                "value": 5,
+                                "title": 5
+                            }, {
+                                "value": 6,
+                                "title": 6
+                            }, {
+                                "value": 7,
+                                "title": 7
+                            }, {
+                                "value": 8,
+                                "title": 8
+                            }, {
+                                "value": 9,
+                                "title": 9
+                            }, {
+                                "value": 10,
+                                "title": 10
+                            }
+                        ]
+                    }                                                                         
+                ]
+            }, {
+                "class": "four",
+                "inputs": [
+                    {
+                        "name": "abdominal_pain",
+                        "title": "Abdominal pain",
+                        "type": "checkbox"
+                    },
+                    { 
+                        "name": "abdominal_pain_during_menstruation",
+                        "title": "During  menstruation",
+                        "type": "checkbox"
+                    },                    
+                    {
+                        "name": "abdominal_pain_score",
+                        "title": "Pain score",
+                        "type": "select",
+                        "options": [
+                            {
+                                "value": 0,
+                                "title": "Select"
+                            },                                
+                            {
+                                "value": 1,
+                                "title": 1
+                            }, {
+                                "value": 2,
+                                "title": 2
+                            }, {
+                                "value": 3,
+                                "title": 3
+                            }, {
+                                "value": 4,
+                                "title": 4
+                            }, {
+                                "value": 5,
+                                "title": 5
+                            }, {
+                                "value": 6,
+                                "title": 6
+                            }, {
+                                "value": 7,
+                                "title": 7
+                            }, {
+                                "value": 8,
+                                "title": 8
+                            }, {
+                                "value": 9,
+                                "title": 9
+                            }, {
+                                "value": 10,
+                                "title": 10
+                            }
+                        ]
+                    }, {
+
+                        "name": "abdominal_pain_occurence",
+                        "title": "Pain score",
+                        "type": "select",
+                        "options": [
+                            {
+                                "value": 0,
+                                "title": "Select"
+                            },                                
+                            {
+                                "value": 1,
+                                "title": "Often"
+                            }, {
+                                "value": 2,
+                                "title": "Several times per week"
+                            }, {
+                                "value": 3,
+                                "title": "Weekly"
+                            }, {
+                                "value": 4,
+                                "title": "Less than once a week"
+                            }
+                        ]                        
+                    }                                                                                            
+                ]
+            }, {
+                "class": "four",
+                "inputs": [
+                    {
+                        "name": "urination_pain",
+                        "title": "Urination pain",
+                        "type": "checkbox"
+                    },
+                    { 
+                        "name": "urination_pain_during_menstruation",
+                        "title": "During  menstruation",
+                        "type": "checkbox"
+                    },                    
+                    {
+                        "name": "urination_pain_score",
+                        "title": "Pain score",
+                        "type": "select",
+                        "options": [
+                            {
+                                "value": 0,
+                                "title": "Select"
+                            },                                
+                            {
+                                "value": 1,
+                                "title": 1
+                            }, {
+                                "value": 2,
+                                "title": 2
+                            }, {
+                                "value": 3,
+                                "title": 3
+                            }, {
+                                "value": 4,
+                                "title": 4
+                            }, {
+                                "value": 5,
+                                "title": 5
+                            }, {
+                                "value": 6,
+                                "title": 6
+                            }, {
+                                "value": 7,
+                                "title": 7
+                            }, {
+                                "value": 8,
+                                "title": 8
+                            }, {
+                                "value": 9,
+                                "title": 9
+                            }, {
+                                "value": 10,
+                                "title": 10
+                            }
+                        ]
+                    }, {
+
+                        "name": "urination_pain_occurence",
+                        "title": "Pain score",
+                        "type": "select",
+                        "options": [
+                            {
+                                "value": 0,
+                                "title": "Select"
+                            },                                
+                            {
+                                "value": 1,
+                                "title": "Often"
+                            }, {
+                                "value": 2,
+                                "title": "Several times per week"
+                            }, {
+                                "value": 3,
+                                "title": "Weekly"
+                            }, {
+                                "value": 4,
+                                "title": "Less than once a week"
+                            }
+                        ]                        
+                    }                                                                                            
+                ]
+            }, {
+                "class": "one",
+                "inputs": [
+                    {
+                        "name": "endometriosis_in_family",
+                        "title": "Endometriosis in Family",
+                        "type": "checkbox"
+                    }
+                ]
+            }
+        ]
+    }
+]

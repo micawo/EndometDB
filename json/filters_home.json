@@ -1,0 +1,366 @@
+[{
+	"title": "Select type",
+    "name": "type",
+	"type": "main_type",
+    "open": true,
+	"hidden": false,
+    "content": [{
+        "type": "checkbox",
+        "title": "Clinical data",
+        "name": "clinical_data",
+        "checked": false
+    }, {
+        "type": "checkbox",
+        "title": "Sample data",
+        "name": "sample_control",
+        "checked": false
+    }]
+}, {
+	"title": "Clinical",
+    "name": "clinical",
+    "open": false,
+	"hidden": true,
+	"type": "clinical",
+	"select_all": true,
+    "content": [{
+        "type": "checkbox",
+        "title": "Age",
+        "name": "age",
+        "checked": false
+    }, {
+        "type": "checkbox",
+        "title": "Cycle Phase & Hormonal Medication",
+        "name": "cycle_phase",
+        "checked": false
+    }, {
+        "type": "checkbox",
+        "title": "Disease stage",
+        "name": "disease_stage",
+        "checked": false
+    }, {
+		"type": "sub_filter",
+		"title": "Sub-Age",
+		"name": "sub_age",
+		"toggle": "age",
+		"open": false,
+		"hidden": true,
+		"select_all": true,
+		"sub_type": "clinical",
+		"content": [{
+			"type": "checkbox",
+			"title": "<20",
+			"name": "20",
+			"checked": true
+		}, {
+			"type": "checkbox",
+			"title": "20-29",
+			"name": "20_29",
+			"checked": true
+		}, {
+			"type": "checkbox",
+			"title": "30-39",
+			"name": "30_39",
+			"checked": true
+		}, {
+			"type": "checkbox",
+			"title": ">39",
+			"name": "39",
+			"checked": true
+		}, {
+			"type": "checkbox",
+			"title": "Unknown",
+			"name": "unknown",
+			"checked": true
+		}]
+	}, {
+		"type": "sub_filter",
+		"title": "Sub-Cycle Phase",
+		"name": "sub_cycle_phase",
+		"toggle": "cycle_phase",
+		"open": false,
+		"hidden": true,
+		"select_all": true,
+		"sub_type": "clinical",
+		"content": [{
+			"type": "checkbox",
+			"title": "Proliferative",
+			"name": "proliferative",
+			"checked": true
+		}, {
+			"type": "checkbox",
+			"title": "Secretory",
+			"name": "secretory",
+			"checked": true
+		}, {
+			"type": "checkbox",
+			"title": "Menstrual",
+			"name": "menstrual",
+			"checked": true
+		}, {
+			"type": "checkbox",
+			"title": "Medication",
+			"name": "medication",
+			"checked": true
+		}]
+	}, {
+		"type": "sub_filter",
+		"title": "Sub-Disease stage",
+		"name": "sub_disease_stage",
+		"toggle": "disease_stage",
+		"open": false,
+		"hidden": true,
+		"select_all": true,
+		"sub_type": "clinical",
+		"content": [{
+			"type": "checkbox",
+			"title": "Stage I",
+			"name": "stage_1",
+			"checked": true
+		}, {
+			"type": "checkbox",
+			"title": "Stage II",
+			"name": "stage_2",
+			"checked": true
+		}, {
+			"type": "checkbox",
+			"title": "Stage III",
+			"name": "stage_3",
+			"checked": true
+		}, {
+			"type": "checkbox",
+			"title": "Stage IV",
+			"name": "stage_4",
+			"checked": true
+		}, {
+			"type": "checkbox",
+			"title": "No Disease",
+			"name": "disease_none",
+			"checked": true
+		}, {
+			"type": "checkbox",
+			"title": "Unknown",
+			"name": "disease_unknown",
+			"checked": true
+		}]
+	}, {
+		"type": "sub_filter",
+		"title": "Sub-Hormonal medication status",
+		"name": "sub_hormonal_medication_status",
+		"toggle": "hormonal_medication_status",
+		"open": false,
+		"hidden": true,
+		"select_all": true,
+		"sub_type": "clinical",
+		"content": [{
+			"type": "checkbox",
+			"title": "Yes",
+			"name": "yes",
+			"checked": true
+		}, {
+			"type": "checkbox",
+			"title": "No",
+			"name": "no",
+			"checked": true
+		}, {
+			"type": "checkbox",
+			"title": "Unknown",
+			"name": "medication_status_unknown",
+			"checked": true
+		}]
+  }]
+}, {
+	"title": "Subject class",
+    "name": "category",
+    "open": false,
+	"hidden": true,
+	"type": "sample",
+
+    "content": [{
+        "type": "checkbox",
+        "title": "Patient",
+        "name": "category_patient",
+        "checked": false
+    }, {
+        "type": "checkbox",
+        "title": "Control",
+        "name": "category_control",
+        "checked": false
+    }]
+}, {
+    "title": "Sample type",
+    "name": "sample_type",
+    "open": false,
+	"hidden": true,
+	"type": "sample",
+    "content": [{
+        "type": "checkbox",
+        "title": "Tissue",
+        "name": "tissue",
+        "checked": true
+    }, {
+        "type": "sub_filter",
+        "title": "Sub-tissues",
+        "name": "sub_tissues",
+		"toggle": "tissue",
+		"open": true,
+		"hidden": true,
+		"select_all": true,
+		"sub_type": "sample",
+		"content": [{
+	        "type": "checkbox",
+	        "title": "Endometrium",
+	        "name": "endometrium",
+	        "checked": true
+	    }, {
+	        "type": "checkbox",
+	        "title": "Peritoneum",
+	        "name": "peritoneum",
+	        "checked": true
+	    }, {
+	        "type": "checkbox",
+	        "title": "Lesions",
+	        "name": "lesions",
+	        "checked": true
+	    }]
+    }, {
+        "type": "sub_filter",
+        "title": "Lesions",
+        "name": "sub_lesions",
+		"toggle": "lesions",
+		"open": true,
+		"hidden": true,
+		"select_all": true,
+		"sub_type": "sample",
+		"content": [{
+			"type": "sub_filter",
+	        "title": "Peritoneal lesion",
+	        "name": "sub_lesions_peritoneal",
+			"toggle": "",
+			"open": false,
+			"hidden": false,
+			"select_all": true,
+			"sub_type": "sample",
+			"content": [{
+		        "type": "checkbox",
+		        "title": "White",
+		        "name": "white",
+		        "checked": true
+		    }, {
+		        "type": "checkbox",
+		        "title": "Black",
+		        "name": "black",
+		        "checked": true
+		    }, {
+		        "type": "checkbox",
+		        "title": "Red",
+		        "name": "red",
+		        "checked": true
+		    }]
+	    }, {
+			"type": "sub_filter",
+	        "title": "Deep endometriosis lesion",
+	        "name": "sub_lesions_deep_endometriosis_lesion",
+			"toggle": "",
+			"open": false,
+			"hidden": false,
+			"select_all": true,
+			"sub_type": "sample",
+			"content": [{
+		        "type": "checkbox",
+		        "title": "Sacroutine Ligament",
+		        "name": "SA",
+		        "checked": true
+		    }, {
+		        "type": "checkbox",
+		        "title": "Sacroutine Ligament right",
+		        "name": "SAO",
+		        "checked": true
+		    }, {
+		        "type": "checkbox",
+		        "title": "Sacroutine Ligament left",
+		        "name": "SAV",
+		        "checked": true
+		    }, {
+		        "type": "checkbox",
+		        "title": "Rectovaginal",
+		        "name": "RE",
+		        "checked": true
+		    }, {
+		        "type": "checkbox",
+		        "title": "Rectovaginal Sigma",
+		        "name": "SI",
+		        "checked": true
+		    }, {
+		        "type": "checkbox",
+		        "title": "Intestinal",
+		        "name": "SU",
+		        "checked": true
+		    }, {
+		        "type": "checkbox",
+		        "title": "Bladder",
+		        "name": "VI",
+		        "checked": true
+		    }, {
+		        "type": "checkbox",
+		        "title": "Ileum",
+		        "name": "IL",
+		        "checked": true
+		    }, {
+		        "type": "checkbox",
+		        "title": "Intestinal Appendix",
+		        "name": "AP",
+		        "checked": true
+		    }]
+	    }, {
+			"type": "sub_filter",
+	        "title": "Ovarian lesion",
+	        "name": "sub_lesions_ovarian_lesion",
+			"toggle": "",
+			"open": false,
+			"hidden": false,
+			"select_all": true,
+			"sub_type": "sample",
+			"content": [{
+		        "type": "checkbox",
+		        "title": "Ovarian Endometrioma",
+		        "name": "O",
+		        "checked": true
+		    }, {
+		        "type": "checkbox",
+		        "title": "Ovarian Endometrioma right",
+		        "name": "OO",
+		        "checked": true
+		    }, {
+		        "type": "checkbox",
+		        "title": "Ovarian Endometrioma left",
+		        "name": "OV",
+		        "checked": true
+		    }]
+	    }]
+    }]
+}, {
+	"title": "Modules",
+    "name": "modules",
+    "open": false,
+	"hidden": true,
+	"type": "sample",
+    "content": [{
+        "type": "checkbox",
+        "title": "Gene expressions <span class='caption'>(from Tissues)</span>",
+        "name": "ge",
+		"requires": ["tissue"],
+        "checked": true
+    }]
+}, {
+    "title": "Gene symbols",
+    "name": "gene_symbol",
+    "open": false,
+	"hidden": true,
+	"toggle": "ge",
+	"type": "gene_symbol",
+    "content": [{
+        "type": "multiselect",
+        "name": "gene_symbols",
+		"clear": true		
+    }]
+}]
