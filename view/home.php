@@ -22,39 +22,24 @@ require_once("header_home.php");
 			<div class="upper_nav">
 				<a href="<?php echo URL; ?>login/"><?php echo (LOGGED_IN) ? "Back" : "Login" ?></a>
 			</div>
-			<div class="right">
-				<?php /* <a href="#">Suomi</a> - <a href="#">English</a> */ ?>
-				<?php /*<div class="sosmed">
-					<a href="#"><img src="<?php echo URL; ?>images/facebook.png" alt="Facebook" /></a>
-					<a href="#"><img src="<?php echo URL; ?>images/twitter.png" alt="Twitter" /></a>
-					<a href="#"><img src="<?php echo URL; ?>images/linkedin.png" alt="Linkedin" /></a>
-				</div> */ ?>
-			</div>
+			<div class="right"></div>
 			<a href="<?php echo URL; ?>"><img src="<?php echo URL; ?>images/logo_iso.png" width="300" height="60" class="logo" alt="" />
 			<h1> Turku Endometriosis Database </h1></a>
 			<div class="clear"></div>
 		</header>
 
+		<div class="menu"></div>
+
 		<ul class="nav">
-			<li<?php echo (!isset($_GET["sivu"])) ? ' class="selected"' : ''; ?>><a href="<?php echo URL.$logged_url; ?>"><i class="fa fa-home"></i></a></li>
+
+			<li<?php echo (!isset($_GET["sivu"])) ? ' class="selected nav_home"' : ' class="nav_home"'; ?>><a href="<?php echo URL.$logged_url; ?>"><i class="fa fa-home"></i></a></li>
+			<li<?php echo ($_GET["sivu"] == "gene_analysis") ? ' class="selected nav_gene_analysis"' : ' class="nav_gene_analysis"'; ?>><a href="<?php echo URL.$logged_url; ?>gene_analysis/"> Start gene analysis </a></li>
+
 			<li<?php echo ($_GET["sivu"] == "research") ? ' class="selected"' : ''; ?>><a href="<?php echo URL.$logged_url; ?>research/"> Research </a></li>
 			<li<?php echo ($_GET["sivu"] == "collaboration") ? ' class="selected"' : ''; ?>><a href="<?php echo URL.$logged_url; ?>collaboration/"> Collaboration </a></li>
-			<li<?php echo ($_GET["sivu"] == "people") ? ' class="selected"' : ''; ?>><a href="<?php echo URL.$logged_url; ?>people/"> People </a></li>
+			<li<?php echo ($_GET["sivu"] == "people") ? ' class="selected"' : ''; ?>><a href="<?php echo URL.$logged_url; ?>people/"> Endomet Team </a></li>
 			<li<?php echo ($_GET["sivu"] == "contact") ? ' class="selected"' : ''; ?>><a href="<?php echo URL.$logged_url; ?>contact/"> Contact </a></li>
-			<li<?php echo ($_GET["sivu"] == "gene_analysis") ? ' class="selected"' : ''; ?>><a href="<?php echo URL.$logged_url; ?>gene_analysis/"> Gene analysis </a></li>
-			<?php /*<li<?php echo ($_GET["sivu"] == "gene_analysis") ? ' class="selected sub-menu"' : ' class="sub-menu"'; ?>>
-				<a href="<?php echo URL.$logged_url; ?>tools/"> Tools </a>
-				<ul>
-					<li><a href="<?php echo URL.$logged_url; ?>gene_analysis/"> Gene analysis </a></li>
-					<li><a href="<?php echo URL.$logged_url; ?>endometriosis_risk_assessment/">Endometriosis Risk Assessment</a></li>
-				</ul>
-			</li>
-			<li class="search">
-				<i class="fa fa-search" id="search-button" aria-hidden="true"></i>
-				<div class="search-area">
-					<input type="search" />
-				</div>
-			</li>*/ ?>
+
 		</ul>
 
 		<?php if(!isset($_GET["sivu"])) { ?>
@@ -88,6 +73,12 @@ require_once("header_home.php");
 			<div class="links">
 
 				<div class="link">
+					<a href="<?php echo URL.$logged_url; ?>analysis/"><img src="<?php echo URL; ?>images/nostot/4.jpg" alt="" /></a>
+					<h3> Gene analysis </h3>
+					<p> Gene expression analysis from 1811 different tissue samples, 242 patients and controls. </p>
+				</div>
+
+				<div class="link">
 					<a href="<?php echo URL.$logged_url; ?>research/"><img src="<?php echo URL; ?>images/nostot/1.jpg" alt="" /></a>
 					<h3> Research </h3>
 					<p> Extensive collection of clinical samples for quality endometriosis research. </p>
@@ -104,18 +95,6 @@ require_once("header_home.php");
 					<h3> Publications </h3>
 					<p> List of endometriosis publications. </p>
 				</div>
-
-				<div class="link">
-					<a href="<?php echo URL.$logged_url; ?>gene_analysis/"><img src="<?php echo URL; ?>images/nostot/4.jpg" alt="" /></a>
-					<h3> Gene analysis </h3>
-					<p> Gene expression analysis from 1811 different tissue samples, 242 patients and controls. </p>
-				</div>
-
-				<?php /*<div class="link">
-					<a href="<?php echo URL.$logged_url; ?>collaboration/"><img src="<?php echo URL; ?>images/nostot/5.jpg" alt="" /></a>
-					<h3> Endometriosis Risk Assessment </h3>
-					<p> Test to determine your risk assessment for endometriosis. </p>
-				</div> */ ?>
 
 			</div>
 
@@ -191,7 +170,17 @@ require_once("header_home.php");
 
 							<h2> Publications </h2>
 
-							<p>Lavonius M,&nbsp;Suvitie&nbsp;P, Varpe P, Huhtinen H. <a href="https://www.ncbi.nlm.nih.gov/pubmed/28367344">Sacral Neuromodulation: Foray into Chronic Pelvic Pain in End Stage&nbsp;Endometriosis.</a> Case Rep Neurol Med. 2017;2017:2197831. doi: 10.1155/2017/2197831.</p>
+							<div id="publications">
+
+								<div class="spinParticleContainer" data-name="home_spinner">
+									<div class="particle red"></div>
+									<div class="particle grey other-particle"></div>
+									<div class="particle blue other-other-particle"></div>
+								</div>
+
+							</div>
+
+							<?php /*<p>Lavonius M,&nbsp;Suvitie&nbsp;P, Varpe P, Huhtinen H. <a href="https://www.ncbi.nlm.nih.gov/pubmed/28367344">Sacral Neuromodulation: Foray into Chronic Pelvic Pain in End Stage&nbsp;Endometriosis.</a> Case Rep Neurol Med. 2017;2017:2197831. doi: 10.1155/2017/2197831.</p>
 
 							<p>Ebert AD, Dong L, Merz M, Kirsch B, Francuski M, B&ouml;ttcher B, Roman H,&nbsp;Suvitie&nbsp;P, Hlavackova O, Gude K, Seitz C. <a href="https://www.ncbi.nlm.nih.gov/pubmed/28189702">Dienogest 2&nbsp;mg Daily in the Treatment of Adolescents with Clinically Suspected&nbsp;Endometriosis: The Visanne Study to Assess Safety in Adolescents.</a> J Pediatr Adolesc Gynecol. 2017 Feb 9. pii: S1083-3188(17)30036-0. doi: 10.1016/j.jpag.2017.01.014.</p>
 
@@ -222,7 +211,7 @@ require_once("header_home.php");
 							<p>Hiissa J, Elo LL, Huhtinen K, Perheentupa A,&nbsp;Poutanen&nbsp;M, Aittokallio T. <a href="https://www.ncbi.nlm.nih.gov/pubmed/19663710">Resampling reveals sample-level differential expression in clinical genome-wide studies.</a> OMICS. 2009 Oct;13(5):381-96. doi: 10.1089/omi.2009.0027.</p>
 
 							<p>Huhtinen K, Suvitie P, Hiissa J, Junnila J, Huvila J, Kujari H, Set&auml;l&auml; M, H&auml;rkki P, Jalkanen J, Fraser J, M&auml;kinen J, Auranen A,&nbsp;Poutanen&nbsp;M, Perheentupa A. <a href="https://www.ncbi.nlm.nih.gov/pubmed/19337252">Serum HE4 concentration differentiates malignant ovarian tumours from ovarian endometriotic cysts.</a> Br J Cancer. 2009 Apr 21;100(8):1315-9. doi: 10.1038/sj.bjc.6605011.</p>
-
+*/ ?>
 						<?php } ?>
 
 					</div>
@@ -246,7 +235,7 @@ require_once("header_home.php");
 
 							<h2> Collaboration </h2>
 
-							<p><strong>Hospitals</strong></p>
+							<h3 class="title">Hospitals</h3>
 
 							<div class="image-wrapper">
 							<?php
@@ -260,7 +249,7 @@ require_once("header_home.php");
 							?>
 							</div>
 
-							<p><strong>Academic Institutions</strong></p>
+							<h3 class="title">Academic Institutions</h3>
 
 							<div class="image-wrapper">
 							<?php
@@ -269,7 +258,7 @@ require_once("header_home.php");
 							?>
 							</div>
 
-							<p><strong>Companies</strong></p>
+							<h3 class="title">Companies / Funding partners</h3>
 
 							<div class="image-wrapper">
 							<?php
@@ -278,16 +267,7 @@ require_once("header_home.php");
 							?>
 							</div>
 
-							<p><strong>Funding partners</strong></p>
-
-							<div class="image-wrapper">
-							<?php
-							$images = glob(ROOT."images/collaboration/Funding_partners/"."*.{jpg,gif,png}",GLOB_BRACE);
-							foreach($images as $image) { echo '<img src="'.URL."images/collaboration/Funding_partners/".basename($image).'" alt="" />'; }
-							?>
-							</div>
-
-							<p><strong>Patient organization</strong></p>
+							<h3 class="title">Patient organization</h3>
 
 							<div class="image-wrapper">
 								<img src="<?php echo URL; ?>images/collaboration/FinnishEndologo.png" alt="" />
@@ -305,219 +285,215 @@ require_once("header_home.php");
 
 							<div class="content_nav">
 
-								<a href="<?php echo URL.$logged_url; ?>contact/" class="selected"> People </a>
+								<a href="<?php echo URL.$logged_url; ?>contact/" class="selected"> Endomet Team </a>
 
 							</div>
 
 							<div id="overview" class="content_article">
 
-								<div class="breadcrumbs"><a href="<?php echo URL.$logged_url; ?>">Home</a><span class="sep">&raquo;</span><span>People</span></div>
+								<div class="breadcrumbs"><a href="<?php echo URL.$logged_url; ?>">Home</a><span class="sep">&raquo;</span><span>Endomet Team</span></div>
 
 								<h2> People </h2>
 
-								<p><strong>Preclinical Science</strong></p>
+								<h3 class="title">Preclinical Science</h3>
 
 								<div class="people-wrapper">
 
 									<div class="people">
 										<figure style="background-image: url(<?php echo URL; ?>images/people/Poutanen_Matti-16.jpg)"></figure>
-										<p class="small">Prof. Matti Poutanen Ph.D.<br />
-										Director, Turku Center for Disease Modeling,<br />
-										Institute of Biomedicine,<br />
-										University of Turku, Turku Finland.</p>
+										<p class="small">Matti Poutanen PhD<br />
+											Institute of Biomedicine, <br />
+											University of Turku, Turku <br />
+											Finland</p>
 									</div>
 
 									<div class="people">
 										<figure style="background-image: url(<?php echo URL; ?>images/people/Taija_Heinosalo.jpg)"></figure>
-										<p>Taija Heinosalo Ph.D.<br />
-										Institute of Biomedicine,<br />
-										University of Turku, Turku Finland.</p>
+										<p>Taija Heinosalo PhD<br />
+											Institute of Biomedicine,<br />
+											University of Turku, Turku <br />
+											Finland</p>
 									</div>
 
 									<div class="people">
-										<figure style="background-image: url(<?php echo URL; ?>images/people/male-silhouette.jpg)"></figure>
-										<p>Michael Gabriel MD.<br />
-										Department of Obstetrics and Gynecology,<br />
-										Institute of Biomedicine,<br />
-										University of Turku, Turku University Hospital.</p>
+										<figure style="background-color: #fff;"></figure>
+										<p>Michael Gabriel MD<br />
+											Department of Obstetrics and Gynecology<br />
+											Institute of Biomedicine,<br />
+											University of Turku, Turku<br />
+											Finland</p>
 									</div>
 
 									<div class="people">
-										<figure style="background-image: url(<?php echo URL; ?>images/people/female-silhouette.jpg)"></figure>
-										<p>Satu Orasniemi M.Sc.<br />
-										Institute of Biomedicine,<br />
-										​University of Turku, Turku Finland.</p>
+										<figure style="background-color: #fff;"></figure>
+										<p>Kaisa Huhtinen PhD<br />
+											Department of Pathology <br />
+											Institute of Biomedicine, <br />
+											University of Turku, Turku <br />
+											Finland</p>
+									</div>
+
+									<div class="people">
+										<figure style="background-color: #fff;"></figure>
+										<p>Kalle Rytkönen PhD<br />
+											Turku Bioscience Centre, <br />
+											University of Turku and Åbo Akademi, Turku <br />
+											Finland</p>
 									</div>
 
 								</div>
 
-
-								<p><strong>Clinical Science</strong></p>
+								<h3 class="title">Clinical Science</h3>
 
 								<div class="people-wrapper">
 
 									<div class="people">
 										<figure style="background-image: url(<?php echo URL; ?>images/people/Antti_Perheentupa.png)"></figure>
-										<p>Adjunct Prof. Antti Perheentupa MD., Ph.D.<br />
-										Department of Obstetrics and Gynecology,<br />
-										Hospital district of Southwestern Finland,<br />
-										Turku Finland.</p>
+										<p>Antti Perheentupa MD, PhD<br />
+											Department of Obstetrics and Gynecology <br />
+											Hospital district of Southwestern Finland, <br />
+											Turku, Finland</p>
 									</div>
 
 									<div class="people">
 										<figure style="background-image: url(<?php echo URL; ?>images/people/Pia_Suvitie.png"></figure>
-										<p>Pia Suvitie MD.<br />
-										Department of Obstetrics and Gynecology,<br />
-										Hospital district of Southwestern Finland,<br />
-										Turku Finland.</p>
+										<p>Pia Suvitie MD, PhD<br />
+											Department of Obstetrics and Gynecology <br />
+											Hospital district of Southwestern Finland, <br />
+											Turku, Finland</p>
 									</div>
 
 									<div class="people">
 										<figure style="background-image: url(<?php echo URL; ?>images/people/Carita_Edgren.png)"></figure>
-										<p>Carita Edgren MD.<br />
-										Department of Obstetrics and Gynecology,<br />
-										Hospital district of Southwestern Finland,<br />
-										Turku Finland.</p>
+										<p> Carita Edgren MD<br />
+											Department of Obstetrics and Gynecology <br />
+											Hospital district of Southwestern Finland, <br />
+											Turku, Finland</p>
 									</div>
 
 									<div class="people">
-										<figure style="background-image: url(<?php echo URL; ?>images/people/Marianne_Hallamaa.png)"></figure>
-										<p>Marianne Hallamaa MD., Ph.D.<br />
-										Department of Obstetrics and Gynecology,<br />
-										Hospital district of Southwestern Finland,<br />
-										Turku Finland.</p>
+										<figure style="background-image: url(<?php echo URL; ?>images/people/Marianne_Hallamaa.jpg)"></figure>
+										<p>Marianne Hallamaa MD, PhD<br />
+											Department of Obstetrics and Gynecology <br />
+											Hospital district of Southwestern Finland, <br />
+											Turku, Finland</p>
 									</div>
 
 									<div class="people">
 										<figure style="background-image: url(<?php echo URL; ?>images/people/Harry_Kujari.jpg)"></figure>
-										<p>Harry Kujari MD.<br />
-										Department of Pathology,<br />
-										Hospital district of Southwestern Finland,<br />
-										Turku Finland.</p>
+										<p>Harry Kujari MD <br />
+											Department of Pathology <br />
+											Hospital district of Southwestern Finland, <br />
+											Turku, Finland</p>
 									</div>
 
 									<div class="people">
 										<figure style="background-image: url(<?php echo URL; ?>images/people/Paivi_Rosneberg.jpg"></figure>
-										<p>P&auml;ivi Rosenberg midwife.<br />
-										Department of Obstetrics and Gynecology,<br />
-										Hospital district of Southwestern Finland,<br />
-										University of Turku, Turku University Hospital,<br />
-										​Turku Finland.</p>
+										<p>Päivi Rosenberg midwife<br />
+											Department of Obstetrics and Gynecology <br />
+											Hospital district of Southwestern Finland, <br />
+											Turku, Finland</p>
 									</div>
 
 									<div class="people">
-										<figure style="background-image: url(<?php echo URL; ?>images/people/male-silhouette.jpg)"></figure>
-										<p>Jyrki Jalkanen, MD., Ph.D.<br />
-										Department of Obstetrics and Gynecology,<br />
-										Central Finland Health Care District Jyvaskyla, Finland.</p>
+										<figure style="background-color: #fff;"></figure>
+										<p>Kirisi Joronen MD, PhD<br />
+											Department of Obstetrics and Gynecology <br />
+											Hospital district of Southwestern Finland, <br />
+											Turku, Finland</p>
 									</div>
 
 									<div class="people">
-										<figure style="background-image: url(<?php echo URL; ?>images/people/female-silhouette.jpg)"></figure>
-										<p>P&auml;ivi H&auml;rkki, MD., Ph.D.<br />
-										Department of Obstetrics and Gynecology,<br />
-										Hospital District of Helsinki and Uusima (HUS) Helsinki, Finland.</p>
+										<figure style="background-color: #fff;"></figure>
+										<p>Jyrki Jalkanen, MD, PhD<br />
+											Department of Obstetrics and Gynecology <br />
+											Central Finland Health Care District <br />
+											Jyvaskyla, Finland</p>
 									</div>
 
 									<div class="people">
-										<figure style="background-image: url(<?php echo URL; ?>images/people/female-silhouette.jpg)"></figure>
-										<p>Marjaleena Set&auml;l&auml;, MD.<br />
-										Department of Obstetrics and Gynecology,<br />
-										P&auml;ij&auml;t-H&auml;me Hospital Lahti, Finland.</p>
+										<figure style="background-color: #fff;"></figure>
+										<p>Päivi Härkki, MD, PhD<br />
+											Department of Obstetrics and Gynecology <br />
+											Hospital District of Helsinki and Uusima (HUS) <br />
+											Helsinki, Finland</p>
 									</div>
 
 									<div class="people">
-										<figure style="background-image: url(<?php echo URL; ?>images/people/female-silhouette.jpg)"></figure>
-										<p>Jaana Fraser, MD.<br />
-										Department of Obstetrics and Gynecology,<br />
-										North Karelia Central Hospital and Honkalampi Center Joensuu, Finland.</p>
+										<figure style="background-color: #fff;"></figure>
+										<p>Marjaleena Setälä, MD<br />
+											Department of Obstetrics and Gynecology<br />
+											Päijät-Häme Hospital<br />
+											Lahti, Finland</p>
+									</div>
+
+									<div class="people">
+										<figure style="background-color: #fff;"></figure>
+										<p>Jaana Fraser, MD<br />
+											North Karelia Central Hospital,
+											Joensuu, Finland</p>
 									</div>
 
 								</div>
 
-								<p><strong>Bioinformatics</strong></p>
+								<h3 class="title">Bioinformatics</h3>
 
 								<div class="people-wrapper">
 
 									<div class="people">
 										<figure style="background-image: url(<?php echo URL; ?>images/people/Tero_Aittokallio.jpg)"></figure>
-										<p>Prof. Tero Aittokallio Ph.D.<br />
-										FIMM - Institute for Molecular Medicine Helsinki, Finland.</p>
+										<p>Tero Aittokallio PhD<br />
+											Institute for Molecular Medicine Finland (FIMM), <br />
+											University of Helsinki, Helsinki <br />
+											Finland</p>
 									</div>
 
 									<div class="people">
-										<figure style="background-image: url(<?php echo URL; ?>images/people/Laura_Elo.jpg)"></figure>
-										<p>Adjunct Prof. Laura Elo Ph.D.<br />
-										Research Director Bioinformatics<br />
-										Turku Center for Biotechnology, Turku Finland.</p>
+										<figure style="background-color: #fff;"></figure>
+										<p>Harri Siitari PhD<br />
+											Department of Neurology,
+											University of Turku, Turku
+											Finland</p>
+									</div>
+
+									<div class="people">
+										<figure style="background-color: #fff;"></figure>
+										<p>Arho Virkki PhD<br />
+											Department of Mathematics and Statistics,<br />
+											University of Turku, Turku <br />
+											Finland</p>
 									</div>
 
 									<div class="people">
 										<figure style="background-image: url(<?php echo URL; ?>images/people/Vidal_Fey.jpg)"></figure>
-										<p>Vidal Fey Ph.D.<br />
-										Institute of Biomedicine,<br />
-										University of Turku, Turku Finland.</p>
+										<p>Vidal Fey PhD<br />
+											Institute of Biomedicine,<br />
+											University of Turku, Turku<br />
+											Finland</p>
+									</div>
+
+									<div class="people">
+										<figure style="background-color: #fff;"></figure>
+										<p>Prem Adhikari PhD<br />
+											Institute of Biomedicine, <br />
+											University of Turku, Turku <br />
+											Finland</p>
 									</div>
 
 									<div class="people">
 										<figure style="background-image: url(<?php echo URL; ?>images/people/Daniel_Laajala.png)"></figure>
-										<p>Daniel Laajala M.Sc.<br />
-										Department of Mathematics and Statistics,<br />
-										University of Turku, Turku Finland.</p>
-									</div>
-									<div class="people">
-										<figure style="background-image: url(<?php echo URL; ?>images/people/Arfa_Mehmood.jpg)"></figure>
-										<p>Arfa Mehmood M.Sc.<br />
-										​Turku Center for Biotechnology, Turku Finland.</p>
+										<p>Daniel Laajala PhD<br />
+											Department of Mathematics and Statistics,<br />
+											University of Turku, Turku<br />
+											Finland</p>
 									</div>
 
-								</div>
-
-								<p><strong>Collaborators</strong></p>
-
-								<div class="people-wrapper">
-
 									<div class="people">
-										<figure style="background-image: url(<?php echo URL; ?>images/people/Seppo_Auriola.jpg)"></figure>
-										<p>Prof. Seppo Auriola Ph.D.<br />
-										Department of Pharmacy,<br />
-										University of Eastern Finland, Kuopio Finland.</p>
-									</div>
-									<div class="people">
-										<figure style="background-image: url(<?php echo URL; ?>images/people/Christopher_Albanese.jpg)"></figure>
-										<p>Prof. Christopher Albanese Ph.D.<br />
-										Department of Oncology and Pathology<br />
-										Georgetown University, Washington DC USA.</p>
-									</div>
-									<div class="people">
-										<figure style="background-image: url(<?php echo URL; ?>images/people/Jerzy_Adamski.jpg)"></figure>
-										<p>Prof. Jerzy Adamski Ph.D.<br />
-										Genome Analysis Center, Institute of Experimental Genetics,<br />
-										Helmholtz Zentrum M&uuml;nchen GmbH Germany.</p>
-									</div>
-									<div class="people">
-										<figure style="background-image: url(<?php echo URL; ?>images/people/Garry_Corthals.jpg)"></figure>
-										<p>Prof. Garry L. Corthals Ph.D.<br />
-										Van &rsquo;t Hoff Institute for Molecular Sciences<br />
-										University of Amsterdam, Amsterdam, Netherlands.</p>
-									</div>
-									<div class="people">
-										<figure style="background-image: url(<?php echo URL; ?>images/people/Manuel_Tena-Sempere.jpg)"></figure>
-										<p>Prof. Manuel Tena-Sempere MD., Ph.D.<br />
-										IMIBIC - The Maimonides Institute for Biomedical Research of C&oacute;rdoba,<br />
-										Cordoba Spain.</p>
-									</div>
-									<div class="people">
-										<figure style="background-image: url(<?php echo URL; ?>images/people/Claes_Ohlsson.jpg)"></figure>
-										<p>Prof. Claes Ohlsson MD., Ph.D.<br />
-										Department of Internal Medicine,<br />
-										University of Gothenburg, Sweden.</p>
-									</div>
-									<div class="people">
-										<figure style="background-image: url(<?php echo URL; ?>images/people/Jan_Brosens.jpg)"></figure>
-										<p>Prof. Jan Brosens MD., Ph.D.<br />
-										The University of Warwick, Warwick Medical School,<br />
-										​Coventry, England United Kingdom</p>
+										<figure style="background-color: #fff;"></figure>
+										<p>Tuomo Komulainen<br />
+											Institute of Biomedicine,<br />
+											University of Turku, Turku <br />
+											Finland</p>
 									</div>
 
 								</div>
@@ -540,34 +516,36 @@ require_once("header_home.php");
 
 							<div class="breadcrumbs"><a href="<?php echo URL.$logged_url; ?>">Home</a><span class="sep">&raquo;</span><span>Contact</span></div>
 
-							<p>Matti Poutanen, Ph.D.</p>
-
 							<div class="contact-container">
-								<img src="<?php echo URL; ?>images/contact_1.jpg" alt="" />
-								<p>Prof. Matti Poutanen, Ph.D.<br />
-								Director, Turku Center for Disease Modeling,<br />
-								Professor of Physiology,<br />
-								Department of Physiology,<br />
-								Institute of Biomedicine,<br />
-								Kiinamyllynkatu 10,<br />
-								20014 University of Turku,<br />
-								E-mail: <a href="mailto:matti.poutanen@utu.fi">matti.poutanen@utu.fi</a><br />
-								​<a href="http://www.tcdm.fi/">www.tcdm.fi</a></p>
+								<figure style="background-image: url(<?php echo URL; ?>images/contact_1.jpg)"></figure>
+								<div class="contact-info">
+									<h2>Prof. Matti Poutanen, Ph.D.</h2>
+									<h3>Director, Turku Center for Disease Modeling</h3>
+									<p>Professor of Physiology,<br />
+									Department of Physiology,<br />
+									Institute of Biomedicine,<br />
+									Kiinamyllynkatu 10,<br />
+									20014 University of Turku</p>
+									<p><a href="mailto:matti.poutanen@utu.fi">matti.poutanen@utu.fi</a></p>
+									<p><a href="http://www.tcdm.fi/" target="_blank">www.tcdm.fi</a></p>
+								</div>
 							</div>
 
 							<div class="contact-container">
-								<img src="<?php echo URL; ?>images/people/Antti_Perheentupa.png" alt="" />
-								<p>Adjunct Prof. Antti Perheentupa, M.D. Ph.D.<br />
-								Hospital district of Southwestern Finland,<br />
-								Department of Obstetrics and Gynecology<br />
-								Kiinamyllynkatu 4-8, PL 52, 20521 Turku,<br />
-								Postal address: PO Box&nbsp;52, 20521 Turku<br />
-								Telephone: 02 313 0000 Switchboard<br />
-								Fax: 02 313 2323<br />
-								​E-mail: <a href="mailto:naistentautien.poliklinikka@tyks.fi">naistentautien.poliklinikka@tyks.fi</a></p>
+
+								<figure style="background-image: url(<?php echo URL; ?>images/people/Antti_Perheentupa.png)"></figure>
+								<div class="contact-info">
+									<h2>Antti Perheentupa, M.D. Ph.D.</h2>
+									<h3>Physician in charge outpatient clinic and infertility treatment</h3>
+									<p>Adjunct Prof.<br />
+									Department of Obstetrics and Gynecology,<br />
+									Hospital district of Southwestern Finland,<br />
+									Kiinamyllynkatu 4-8,<br />
+									PL 52, 20521 Turku Finland</p>
+									<a href="mailto:antti.perheentupa@tyks.fi">antti.perheentupa@tyks.fi</a></p>
+								</div>
+								​
 							</div>
-
-
 
 						</div>
 
@@ -578,7 +556,6 @@ require_once("header_home.php");
 					<article class="content flex">
 
 						<div class="content_nav">
-
 							<a href="<?php echo URL.$logged_url; ?>tools/" class="selected"> Tools </a>
 							<a href="<?php echo URL.$logged_url; ?>gene_analysis/"> Gene analysis </a>
 							<a href="<?php echo URL.$logged_url; ?>endometriosis_risk_assessment/"> Endometriosis Risk Assessment </a>
@@ -598,71 +575,319 @@ require_once("header_home.php");
 
 					</article>
 
-				<?php } else if($_GET["sivu"] == "gene_analysis") { ?>
+				<?php } else if($_GET["sivu"] == "analysis") { // Uutta 12.06.2020 ?>
 
-					<article class="content" id="demo-home" style="position: relative; min-height: 570px;">
+					<?php if(!isset($_GET["osio"])) { ?>
 
-						<button class="btn green" data-name="start_analysis"> Start Gene Expression Analysis </button>
+					<article class="content">
 
-						<div class="spinParticleContainer" data-name="home_spinner">
-							<div class="particle red"></div>
-							<div class="particle grey other-particle"></div>
-							<div class="particle blue other-other-particle"></div>
-						</div>
+						<div class="links" data-row="3">
 
-						<div id="statistics" style="display: none;">
+							<div class="link">
+								<a href="<?php echo URL.$logged_url; ?>analysis/database"><img src="<?php echo URL; ?>images/nostot/analysis_2.jpg" style="border-bottom: 1px solid #ddd;" alt="" /></a>
+								<h3> Endomet database </h3>
+								<p> EndometDB is repository of microarray gene expression profile data for normal endometrium, peritoneum and endometriosis lesions. </p>
+							</div>
 
-				            <div class="block_area">
+							<div class="link">
+								<a href="<?php echo URL.$logged_url; ?>analysis/statistics/"><img src="<?php echo URL; ?>images/nostot/analysis_1.jpg" alt="" /></a>
+								<h3> Tissue & Sample statistics </h3>
+								<p> Dataset summary of analysis samples. </p>
+							</div>
 
-				                <div class="block">
-
-				                    <div class="block_inner">
-
-				                        <h1>Patients / controls</h1>
-
-				                        <div class="donut-chart" data-name="patient">
-				                            <div class="info hide"></div>
-				                            <div class="donuts"></div>
-				                        </div>
-
-				                        <div class="bullets_wrapper">
-				                            <ul class="bullets"></ul>
-				                        </div>
-
-				                        <div class="clear"></div><p class="havainnot_total" style="margin: 20px 0 0 0;">Total Patients: <b>2247</b>, Total Samples: <b>19847</b></p>
-
-				                    </div>
-
-				                </div>
-
-				                <!-- -->
-
-				                <div class="block">
-
-				                    <div class="block_inner">
-
-				                        <h1>Samples by tissue type</h1>
-
-				                        <div class="donut-chart" data-name="tissue">
-											<div class="info hide"></div>
-				                            <div class="donuts"></div>
-				                        </div>
-
-				                        <div class="bullets_wrapper">
-				                        	<ul class="bullets"></ul>
-				                        </div>
-
-				                    </div>
-
-				                </div>
-
-				            </div>
+							<div class="link">
+								<a href="<?php echo URL.$logged_url; ?>analysis/guide"><img src="<?php echo URL; ?>images/nostot/analysis_3.jpg" alt="" /></a>
+								<h3> Guide </h3>
+								<p> A guide for how to use the gene analysis tool. </p>
+							</div>
 
 						</div>
 
 					</article>
 
-					<article class="content flex" id="demo-content" style="display: none;">
+					<?php } else { ?>
+
+						<article class="content flex">
+
+							<div class="content_nav">
+
+								<a href="<?php echo URL.$logged_url; ?>analysis/database/"<?php echo ($_GET["osio"] == "database") ? ' class="selected"' : ''; ?>> Endomet database  </a>
+								<a href="<?php echo URL.$logged_url; ?>analysis/statistics/"<?php echo ($_GET["osio"] == "statistics") ? ' class="selected"' : ''; ?>> Tissue & Sample statistics  </a>
+								<a href="<?php echo URL.$logged_url; ?>analysis/guide/"<?php echo ($_GET["osio"] == "guide") ? ' class="selected"' : ''; ?>> Guide </a>
+
+							</div>
+
+							<?php if($_GET["osio"] == "database") { ?>
+
+								<div id="overview" class="content_article">
+
+									<div class="breadcrumbs"><a href="<?php echo URL.$logged_url; ?>">Home</a><span class="sep">&raquo;</span><a href="<?php echo URL.$logged_url; ?>analysis/">Gene analysis</a><span class="sep">&raquo;</span><span>Database</span></div>
+									<h2> Database </h2>
+									<p>Lorem ipsum </p>
+
+								</div>
+
+							<?php } else if($_GET["osio"] == "statistics") { ?>
+
+								<div id="overview" class="content_article" id="demo-home" style="position: relative; min-height: 570px;">
+
+									<div class="breadcrumbs"><a href="<?php echo URL.$logged_url; ?>">Home</a><span class="sep">&raquo;</span><a href="<?php echo URL.$logged_url; ?>analysis/">Gene analysis</a><span class="sep">&raquo;</span><span>Tissue & Sample statistics</span></div>
+									<h2> Tissue & Sample statistics  </h2>
+
+									<?php /*<button class="btn green" data-name="start_analysis"> Start Gene Expression Analysis </button> */ ?>
+
+									<div class="spinParticleContainer" data-name="home_spinner">
+										<div class="particle red"></div>
+										<div class="particle grey other-particle"></div>
+										<div class="particle blue other-other-particle"></div>
+									</div>
+
+									<div id="test_svg"></div>
+
+									<div id="statistics" style="display: none;"> <?php /* style="display: none;" || class="plotly_grid" */ ?>
+
+							            <div class="block_area grid" data-grid="3">
+
+							                <div class="block">
+
+							                    <div class="block_inner">
+
+							                        <h1>Patients / controls</h1>
+
+							                        <div class="donut-chart" data-name="patient">
+							                            <div class="info hide"></div>
+							                            <div class="donuts"></div>
+							                        </div>
+
+							                        <div class="bullets_wrapper">
+							                            <ul class="bullets"></ul>
+							                        </div>
+
+							                        <div class="clear"></div><p class="havainnot_total" style="margin: 20px 0 0 0;">Total Patients: <b>2247</b>, Total Samples: <b>19847</b></p>
+
+							                    </div>
+
+							                </div>
+
+							                <!-- -->
+
+							                <div class="block">
+
+							                    <div class="block_inner">
+
+							                        <h1>Samples by tissue type</h1>
+
+							                        <div class="donut-chart" data-name="tissue">
+														<div class="info hide"></div>
+							                            <div class="donuts"></div>
+							                        </div>
+
+							                        <div class="bullets_wrapper">
+							                        	<ul class="bullets"></ul>
+							                        </div>
+
+							                    </div>
+
+							                </div> <!-- Block -->
+
+							            </div> <!-- Block area -->
+
+									</div> <!-- statistics -->
+
+								</div> <!-- Article -->
+
+								<?php /*<script src="<?php echo URL; ?>js/plotly-latest.min.js"></script> */ ?>
+
+							<?php } else if($_GET["osio"] == "guide") { ?>
+
+								<div id="lightbox"></div>
+
+								<div id="overview" class="content_article">
+
+									<div class="breadcrumbs"><a href="<?php echo URL.$logged_url; ?>">Home</a><span class="sep">&raquo;</span><a href="<?php echo URL.$logged_url; ?>analysis/">Gene analysis</a><span class="sep">&raquo;</span><span>How to guide</span></div>
+
+									<h2> Getting Started </h2>
+
+									<p><strong>User guide in PDF-format</strong></p>
+
+									<a href="<?php echo URL; ?>images/EndometDB_Guide.pdf" target="_blank">EndometDB_Guide.pdf</a>
+
+									<p><strong>User Interface </strong></p>
+
+									<p>EndometDB supports all internet enabled devices using a modern browser. It utilizes HTML5, JavaScript, PHP, and R as the main programming languages. The interactive visualization is implemented using the Plotly open source JavaScript graphing library.</p>
+
+									<p>When the EndometDB opens, the interface features a window divided into panes: the filter control in the left pane, and a tabbed browser in the right pane.</p>
+
+									<a class="fnbx" href="<?php echo URL; ?>images/guide/1.png" target="_blank"><img src="<?php echo URL; ?>images/guide/1.png" class="full" alt="EndometDB" /></a>
+
+									<p><strong>Filter Control</strong></p>
+
+									<p> The left pane of the main window displays a filter control that allows users interact with the data in the EndometDB. </p>
+
+									<p> the nodes in the filter control can be expanded to access context menus by clicking in the check box. The filter control expands to display options that includes one or more of the following selections: </p>
+
+									<a class="fnbx" href="<?php echo URL; ?>images/guide/2.png" target="_blank"><img src="<?php echo URL; ?>images/guide/2.png" style="width: auto;" class="full" alt="EndometDB" /></a>
+
+									<p> the nodes in the filter control can be expanded to access context menus by clicking in the check box. The filter control expands to display options that includes one or more of the following selections: </p>
+
+									<table class="guide">
+										<tbody>
+											<tr>
+												<th>
+													<p><strong>Option</strong></p>
+												</th>
+												<th>
+													<p><strong>Action</strong></p>
+												</th>
+											</tr>
+											<tr>
+												<td>
+												<p><strong>Clinical data</strong></p>
+												</td>
+												<td>
+												<p>Click in check box to display clinical data menus that includes data such as age, cycle phase &amp; hormonal medication use, and disease stage.</p>
+												</td>
+											</tr>
+											<tr>
+												<td>
+												<p><strong>Age</strong></p>
+												</td>
+												<td>
+												<p>Click in check box to display age categories</p>
+												</td>
+											</tr>
+											<tr>
+												<td>
+												<p><strong>Cycle phase &amp; Hormonal medication</strong></p>
+												</td>
+												<td>
+												<p>Click in check box to display cycle phase and hormonal medication use</p>
+												</td>
+											</tr>
+											<tr>
+												<td>
+												<p><strong>Disease Stage</strong></p>
+												</td>
+												<td>
+												<p>Click in check box to display the different stages of disease</p>
+												</td>
+											</tr>
+											<tr>
+												<td>
+												<p><strong>Sample data</strong></p>
+												</td>
+												<td>
+												<p>Click in check box to display the subject class menus</p>
+												</td>
+											</tr>
+											<tr>
+												<td>
+												<p><strong>Subject class</strong></p>
+												</td>
+												<td>
+												<p>Click in check box to display the sample type menu</p>
+												</td>
+											</tr>
+											<tr>
+												<td>
+												<p><strong>Sample type</strong></p>
+												</td>
+												<td>
+												<p>Selected by defaults displays the tissues and the lesions</p>
+												</td>
+											</tr>
+											<tr>
+												<td>
+												<p><strong>Tissue</strong></p>
+												</td>
+												<td>
+												<p>Selected by default to display the different tissue types plus the lesion</p>
+												</td>
+											</tr>
+											<tr>
+												<td>
+												<p><strong>Lesions</strong></p>
+												</td>
+												<td>
+												<p>Selected by default under tissue menu displays the different lesion types</p>
+												</td>
+											</tr>
+											<tr>
+												<td>
+												<p><strong>Modules</strong></p>
+												</td>
+												<td>
+												<p>Click in check box to display the gene symbols menu with text box to enter gene interest or copy paste genes of interest.</p>
+												</td>
+											</tr>
+											<tr>
+												<td>
+												<p><strong>Gene symbols</strong></p>
+												</td>
+												<td>
+												<p>Entering gene of interest or copy pasting genes displays Statistics &amp; Projections menu</p>
+												</td>
+											</tr>
+											<tr>
+												<td>
+												<p><strong>Clear</strong></p>
+												</td>
+												<td>
+												<p>Clear button clears all the genes in the text box</p>
+												</td>
+											</tr>
+											<tr>
+												<td>
+												<p><strong>Statistics and Projections</strong></p>
+												</td>
+												<td>
+												<p>Select plots from drop down menu to display different functions available</p>
+												</td>
+											</tr>
+											<tr>
+												<td>
+												<p><strong>Run analysis</strong></p>
+												</td>
+												<td>
+												<p>Run analysis button executes the</p>
+												</td>
+											</tr>
+											<tr>
+												<td>
+												<p><strong>Reset</strong></p>
+												</td>
+												<td>
+												<p>Resets all to default settings</p>
+												</td>
+											</tr>
+											<tr>
+												<td>
+												<p><strong>Close</strong></p>
+												</td>
+												<td>
+												<p>Closes current browser except for the default browser</p>
+												</td>
+											</tr>
+										</tbody>
+									</table>
+
+									<p><strong>Filter Control</strong></p>
+
+									<p> The right pane of the EndometDB window feature a tab browser that displays plots and projections from gene or genes of interest with different selected options in the filter control in the left window. The plus sign (+) to the right of the browser appears when an initial plot is done. Use the plus sign (+) to add more tabs. </p>
+
+									<a class="fnbx" href="<?php echo URL; ?>images/guide/3.png" target="_blank"><img src="<?php echo URL; ?>images/guide/3.png" style="width: auto;" class="full" alt="EndometDB" /></a>
+
+								</div>
+
+							<?php } ?>
+
+						</article>
+
+					<?php } ?>
+
+				<?php } else if($_GET["sivu"] == "gene_analysis") { ?>
+
+					<article class="content" id="demo-content">
 
 						<div class="content_article demo">
 
@@ -719,11 +944,9 @@ require_once("header_home.php");
 		<footer>
 
 			<div class="section">
-				<h2>Visiting address</h2>
-
-				<p>
-				Kiinamyllynkatu 4-8<br />
-				20521 Turku</p>
+				<h2> Visiting address</h2>
+				<p> Kiinamyllynkatu 4-8<br />
+					20521 Turku</p>
 			</div>
 
 			<div class="section">

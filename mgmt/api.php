@@ -19,7 +19,7 @@
 					switch($_GET["osio"]) {
 
 						case "options":
-							if(IS_LOGGED) {
+							if(LOGGED_IN) {
 
 								require_once(MGMT.'analysis.php');
 								$analysis = new EndometDBAnalysis();
@@ -27,26 +27,28 @@
 							}
 						break;
 						case "getgraph":
-							if(IS_LOGGED) {
-								$this->getRGraph();
-							}
+							session_write_close();
+							$this->getRGraph();
 						break;
 						case "getpdfgraph":
-							if(IS_LOGGED) {
-								$this->getPDFGraph();
-							}
+							session_write_close();
+							$this->getPDFGraph();
 						break;
 						case "pdf":
+							session_write_close();
 							$this->getPDF();
 						break;
 						case "getsymbols":
+							session_write_close();
 							$this->getsymbols();
 						break;
 
 						case "getRGraph":
+							session_write_close();
 							$this->getRGraph();
 						break;
 						case "getstatistics":
+							session_write_close();
 							$this->getStatistics();
 						break;
 						case "save_user":
@@ -77,6 +79,14 @@
 							$patient->savePatient();
 						break;
 
+						case "canceljob":
+							$this->cancelJob();
+						break;
+
+						case "jobstate":
+							$this->getJobState();
+						break;
+
 						/* No match */
 
 						default:
@@ -94,39 +104,194 @@
 
 		/* Main page statistics */
 
-		private function getStatistics() {
+		private function generateStatistics() {
 
-			$colorarr = array('green', 'red', 'orange', 'blue', 'yellow', 'brown', 'pink', 'gray', 'cyan', 'purple');
+			/*
 
-			/*$stats = new StdClass();
-			$stats->patient = array();
-			$stats->tissue = array();
-			$stats->total = new StdClass();
-			$stats->total->samples = 40;
+			Uutta 18.06.2020 Haetaan etusivun graafeihin:
 
-			$samples = pg_fetch_object($this->pquery("SELECT COUNT(*) AS samples FROM public.patient_sample"));
-			$patients = pg_fetch_object($this->pquery("SELECT COUNT(*) AS patients FROM public.patient"));
+			Patients
+			Age
+			Cycle Phase
+			Stage
+			Tissue Type
+			Hormonal status
 
-			$stats->total->samples = $samples->samples;
-			$stats->total->patients = $patients->patients;
+			*/
+
+			// PATIENT
 
 			$patients_p = pg_fetch_object($this->pquery("SELECT COUNT(*) AS c FROM patient WHERE patient.code_patient_category_id = 266"));
 			$patients_c = pg_fetch_object($this->pquery("SELECT COUNT(*) AS c FROM patient WHERE patient.code_patient_category_id = 267"));
-			$patients_t = intval($patients_p->c) + intval($patients_c->c);
+			//$patients_t = intval($patients_p->c) + intval($patients_c->c);
 
-			$t = new StdClass();
-			$t->percent = round(($patients_p->c / $patients_t) * 100);
-			$t->color = $colorarr[2];
-			$t->info = "Patients (".$patients_p->c.")";
-			$t->text = '<b>'.$patients_p->c.'</b> Patients';
-			$stats->patient[]= $t;
+			$patient = new StdClass();
+			$patient->title = "Patients";
+			$patient->data = array();
+			$patient->scheme = "yellow";
 
-			$t = new StdClass();
-			$t->percent = round(($patients_c->c / $patients_t) * 100);
-			$t->color = $colorarr[0];
-			$t->info = "Controls (".$patients_c->c.")";
-			$t->text = '<b>'.$patients_c->c.'</b> Controls';
-			$stats->patient[]= $t;
+			$patient->data[] = (object) array(
+
+				"title" => "Patients",
+				"value" => $patients_p->c
+			);
+
+			$patient->data[] = (object) array(
+
+				"title" => "Controls",
+				"value" => $patients_c->c
+			);
+
+			// AGE
+
+			$age_query = $this->pquery("SELECT age FROM patient_survey");
+
+			$age_arr = array(
+				2,
+				0,
+				0,
+				0,
+				0
+			);
+
+			$age_title = array(
+				"< 20",
+				"20 - 29",
+				"30 - 39",
+				"> 39",
+				"Unknown"
+			);
+
+			while ($ag = pg_fetch_object($age_query)) {
+
+				$a = (is_numeric($ag->age)) ? intval($ag->age) : false;
+
+				if(!is_numeric($a)) {
+
+					$age_arr[4] += 1;
+
+				} else if($a < 20) {
+
+					$age_arr[0] += 1;
+
+				} else if($a >= 20 && $a < 30) {
+
+					$age_arr[1] += 1;
+
+				} else if($a >= 30 && $a < 40) {
+
+					$age_arr[2] += 1;
+
+				} else if($a >= 40) {
+
+					$age_arr[3] += 1;
+
+				} else {
+
+					$age_arr[4] += 1;
+				}
+			}
+
+			$age = new StdClass();
+			$age->title = "Age";
+			$age->data = array();
+			$age->scheme = "blue";
+
+			for($i = 0; $i < count($age_arr); $i += 1) {
+
+				$ad = new StdClass();
+				$ad->title = $age_title[$i];
+				$ad->value = $age_arr[$i];
+				$age->data[] = $ad;
+			}
+
+			// CYCLE PHASES
+
+			$cycle_phases_query = $this->pquery("SELECT
+			code_value.title_en as cyclephase,
+			patient.id as PatientID
+			FROM
+			public.pathology_report_endometrium,
+			public.patient,
+			public.patient_sample,
+			public.code_value
+			WHERE
+			patient_sample.patient_id = patient.id AND
+			pathology_report_endometrium.patient_sample_id = patient_sample.id AND
+			pathology_report_endometrium.code_histology_class_id = code_value.id");
+
+			$cycle_phases_arr = array();
+
+			while($cp = pg_fetch_object($cycle_phases_query)) {
+
+				if(!array_key_exists($cp->cyclephase, $cycle_phases_arr)) {
+
+					$cycle_phases_arr[$cp->cyclephase] = 1;
+
+				} else {
+
+					$cycle_phases_arr[$cp->cyclephase] += 1;
+				}
+			}
+
+			$cycle_phases = new StdClass();
+			$cycle_phases->title = "Cycle Phases";
+			$cycle_phases->data = array();
+			$cycle_phases->scheme = "cyan";
+
+			foreach($cycle_phases_arr as $k => $v) {
+
+				$res = new StdClass();
+				$res->title = $k;
+				$res->value = $v;
+				$cycle_phases->data[] = $res;
+			}
+
+			// DISEASE STAGE
+
+			$stage_query = $this->pquery("SELECT
+			code_value.value as stage,
+			sample_analysis_result.id as sid
+			FROM
+			public.sample_analysis_result,
+			public.patient_sample,
+			public.patient,
+			public.code_value,
+			public.patient_endometriosis_classification
+			WHERE
+			sample_analysis_result.sample_id = patient_sample.sample_id AND
+			patient_sample.patient_id = patient.id AND
+			patient_endometriosis_classification.patient_id = patient.id AND
+			patient_endometriosis_classification.code_stage_id = code_value.id");
+
+			$stage_arr = array();
+
+			while($sq = pg_fetch_object($stage_query)) {
+
+				if(!array_key_exists($sq->stage, $stage_arr)) {
+
+					$stage_arr[$sq->stage] = 1;
+
+				} else {
+
+					$stage_arr[$sq->stage] += 1;
+				}
+			}
+
+			$stage = new StdClass();
+			$stage->title = "Stage";
+			$stage->data = array();
+			$stage->scheme = "green";
+
+			foreach($stage_arr as $k => $v) {
+
+				$res = new StdClass();
+				$res->title = $k;
+				$res->value = $v;
+				$stage->data[] = $res;
+			}
+
+			// Tissue type
 
 			$tissues = pg_fetch_object($this->pquery("SELECT COUNT(*) as total,
 			SUM(CASE WHEN patient_sample.code_tissue_type_id = 366 THEN 1 ELSE 0 END) AS blood_serum,
@@ -153,24 +318,78 @@
 				"deep" => 'Deep Endometriosis',
 			];
 
-			$i = 0;
+			$tissue_type = new StdClass();
+			$tissue_type->title = "Tissue type";
+			$tissue_type->data = array();
+			$tissue_type->scheme = "red";
 
 			foreach($t_title as $k => $v) {
 
-				if(!isset($colorarr[$i])) { $i = 0; }
-				$t = new StdClass();
-				$t->percent = round(($tissues->{$k} / $tissues->total) * 100);;
-				$t->color = $colorarr[$i];
-				$t->info = $v." (".$tissues->{$k}.")";
-				$t->text = '<b>'.$tissues->{$k}.'</b> '.$v;
-				$stats->tissue[] = $t;
-				$i += 1;
+				$res = new StdClass();
+				$res->title = $v;
+				$res->value = $tissues->{$k};
+				$tissue_type->data[] = $res;
 			}
 
-			echo json_encode($stats);
-			exit;*/
+			// HORMONAL STATUS
 
-			$statistics = json_decode(file_get_contents(JSON."statistics.json"));
+			$hormonal_status = new StdClass();
+			$hormonal_status->title = "Hormonal status";
+			$hormonal_status->data = array();
+			$hormonal_status->scheme = "dark_blue";
+
+			$hormonal_status->data[] = (object) array(
+
+				"title" => "Patients",
+				"value" => 51
+			);
+
+			$hormonal_status->data[] = (object) array(
+
+				"title" => "Controls",
+				"value" => 18
+			);
+
+			return array(
+				$patient,
+				$age,
+				$cycle_phases,
+				$stage,
+				$tissue_type,
+				$hormonal_status
+			);
+		}
+
+		private function getStatistics() {
+
+			$colorarr = array('green', 'red', 'orange', 'blue', 'yellow', 'brown', 'pink', 'gray', 'cyan', 'purple');
+
+			if(!LOGGED_IN) {
+
+				if(!file_exists(JSON."statistics_home.json")) {
+
+					$statistics = $this->generateStatistics();
+					$myfile = fopen(JSON."statistics_home.json", "w");
+					fwrite($myfile, json_encode($statistics));
+					fclose($myfile);
+
+				} else if(time() - filemtime(JSON."statistics_home.json") > 30 * 3600) { // Jos yli kuukauden vanha niin uusitaan
+
+					$statistics = $this->generateStatistics();
+					$myfile = fopen(JSON."statistics_home.json", "w");
+					fwrite($myfile, json_encode($statistics));
+					fclose($myfile);
+
+				} else {
+
+					$statistics = json_decode(file_get_contents(JSON."statistics_home.json"));
+				}
+
+			} else {
+
+				$statistics = json_decode(file_get_contents(JSON."statistics.json"));
+			}
+
 			$data = array();
 
 			foreach($statistics as $st) {
@@ -179,6 +398,12 @@
 				$obj = new StdClass();
 				$obj->title = $st->title;
 				$obj->data = array();
+
+				if($st->scheme) {
+
+					$obj->scheme = $st->scheme;
+				}
+
 				$i = 0;
 
 				if(isset($st->data)) {
@@ -212,7 +437,9 @@
 
 		private function getsymbols() {
 
-			if(!file_exists(ROOT.'mgmt/genes.json')) {
+      		$data = new StdClass();
+
+			if(!file_exists(ROOT.'mgmt/genes.json')) { // || (time() - filemtime(ROOT.'mgmt/genes.json') > 30 * 3600)
 
 				$gene_data = $this->pquery("SELECT DISTINCT symbol FROM normalized_microarray_data");
 
@@ -259,21 +486,32 @@
 
 			$data = json_decode($_POST["data"]);
 			$rparams = "process(".$this->buildRObject($data).")";
+			$cnx = NULL;
+			$result = NULL;
 
-			$myfile = fopen(ROOT."mgmt/testfile3.txt", "w");
-			fwrite($myfile, print_r($rparams, true));
-			fclose($myfile);
+			try {
 
-			//$rparams = $rparams;
-			//require_once(INCLUDE_DIR.'rserve-php/Connection.php');
-			//$cnx = new Rserve_Connection(RSERVE_HOST);
+				$cnx = new Connection(RSERVE_HOST, RSERVE_PORT);
+				$result = $cnx->evalString($rparams);
 
-			$cnx = new Connection(RSERVE_HOST, RSERVE_PORT);
-			$result = $cnx->evalString($rparams);
+			} catch(Exception $e) {
 
-			$myfile = fopen(ROOT."mgmt/testfile2.txt", "w");
-			fwrite($myfile, print_r($result, true));
-			fclose($myfile);
+				http_response_code(500);
+
+				if($data->params->pid) {
+
+					$this->getJobState($data->params->pid);
+
+				} else {
+
+					echo json_encode(array(
+
+						"msg" => $e->getMessage()
+					));
+				}
+
+				exit;
+			}
 
 			if(is_array($result)) { // Jos monta plotsia
 
@@ -392,10 +630,6 @@
 				$res->type = "json";
 			}
 
-			$myfile = fopen(ROOT."mgmt/testfile.txt", "w");
-			fwrite($myfile, print_r($res, true));
-			fclose($myfile);
-
 			header('Content-Type: application/json; charset=utf-8');
 			echo json_encode($res);
 			exit;
@@ -445,6 +679,112 @@
 				exit;
 			}
 		}
+
+
+		private function getJobState($pid = NULL) {
+
+			header('Content-Type: text/plain; charset=utf-8');
+
+			$pid = (!$pid) ? (!isset($_POST["pid"]) ? NULL : $_POST["pid"]) : $pid;
+
+      		if(!$pid) {
+
+        		http_response_code(400); // BAD REQUEST
+        		echo 'Parameter "pid" was not defined in the request.';
+        		echo print_r($_POST);
+        		exit;
+      		}
+
+			if(preg_match('[*?[\]{}./]', $pid)) {
+
+				http_response_code(400); // BAD REQUEST
+				echo 'Malformed parameter "pid".';
+				exit;
+			}
+
+			$job_candidates = glob(realpath(PROCESSES_DIR)."/$pid-*");
+
+			if($job_candidates === FALSE) {
+
+				http_response_code(500);
+				echo 'Could not access job queue.';
+				exit;
+			}
+
+			// More exact search for the job, as glob might give false positives.
+			// We get the state with the same regex.
+
+      		$job_file = NULL;
+
+	  		foreach ($job_candidates as $job) {
+
+				if(preg_match("~/$pid-(running|canceled|completed).log$~", $job, $job_matches)) {
+
+					$job_file = $job;
+          			$state = $job_matches[1];
+          			break;
+        		}
+      		}
+
+			if(is_null($job_file)) {
+
+				http_response_code(422); // UNPROCESSABLE ENTITY
+				echo "Job $pid was not found.";
+				exit;
+			}
+
+			$contents = file($job_file, FILE_IGNORE_NEW_LINES);
+			header('Content-Type: application/json; charset=utf-8');
+
+			echo json_encode(array(
+				"state" => $state,
+				"msg" => $contents[count($contents) - 1])
+			);
+
+			exit;
+    	}
+
+    	private function cancelJob() {
+
+			header('Content-Type: text/plain; charset=utf-8');
+
+			if (!isset($_POST["pid"])) {
+
+				http_response_code(400); // BAD REQUEST
+				echo 'Parameter "pid" was not defined in the request.';
+				exit;
+			}
+
+      		$pid = $_POST["pid"];
+
+			if(preg_match('[*?[\]{}./]', $pid)) {
+
+        		http_response_code(400); // BAD REQUEST
+        		echo 'Malformed parameter "pid".';
+        		exit;
+      		}
+
+      		$running_pid = realpath(PROCESSES_DIR)."/$pid-running.log";
+
+	  		if(!file_exists($running_pid)) {
+
+        		http_response_code(422); // UNPROCESSABLE ENTITY
+        		echo "No active job $pid was found.";
+        		exit;
+      		}
+
+      		$canceled_pid = realpath(PROCESSES_DIR)."/$pid-canceled.log";
+
+			if(!rename($running_pid, $canceled_pid)) {
+
+				http_response_code(500);
+        		echo "Cancelling job $pid failed.";
+        		exit;
+      		}
+
+			echo "Job $pid cancelled.";
+      		exit;
+    	}
 
 		private function parseResults($result) {
 

@@ -294,6 +294,9 @@
 			<div class="particle blue other-other-particle"></div>
 		</div>
 
+		<p class="loading_info">info</p>
+	    <button class="btn green icon left fa-times" id="cancel_plot"> Cancel </button>		
+
 		<div class="stillSpinParticleContainer">
 			<div class="particle red"></div>
 			<div class="particle grey"></div>

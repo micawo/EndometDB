@@ -41,8 +41,12 @@
 	<?php if($_GET["sivu"] == "gene_analysis") { ?>
 
 		<header id="nav">
-			<div class="inner">
-      <a href="<?php echo URL; ?>"><i class="fa fa-home"></i> Home </a>
+			<div class="inner wide padding">
+				<div class="logo">
+					<figure class="logo_img"></figure>
+					<h2>Turku Endometriosis Database</h2>
+				</div>
+      			<a href="<?php echo URL; ?>"><i class="fa fa-home"></i> Home </a>
 			</div>
 		</header>
 

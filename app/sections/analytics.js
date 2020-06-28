@@ -4,6 +4,7 @@ import ajax from '../utils/ajax';
 import initSelectize from '../utils/selectize';
 import { detectTransitionEnd } from '../utils/transitions';
 import colorbrewer from 'colorbrewer';
+import generateID from '../utils/id_generator';
 
 $.fn.extend({
 
@@ -47,6 +48,7 @@ export default function analytics(self_) {
         sbtm_nav    = document.querySelector(".btn[data-name='run_analysis_nav']"),
 		filters   	= document.querySelectorAll("#filters .filter:not(:first-of-type)"),
 		chart 	  	= document.querySelector("#chart"),
+		cancelBtn   = document.querySelector("#cancel_plot"),
 		loading   	= false,
         plotly_json = [],
 		tab_index 	= 0;
@@ -55,6 +57,7 @@ export default function analytics(self_) {
 	reset_state.filter.type.clinical = false;
 	reset_state.filter.type.sample = false;
 
+	var plot_state_interval = null; // Uusi 24.6.2020 Päivitetään infotietoja
 
     /* Keyboard shortcut for debugging purposes */
     document.onkeyup = function(e) {
@@ -412,7 +415,8 @@ export default function analytics(self_) {
             "color.spectrum": color_spectrum,
 			"do.pdf": false,
 			".scale": false,
-            "lfda.metric": $(".fl[data-name='lfda_metric']").attr("data-value")
+            "lfda.metric": $(".fl[data-name='lfda_metric']").attr("data-value"),
+			"pid": generateID()
 		};
 
 		return data;
@@ -714,8 +718,42 @@ export default function analytics(self_) {
         toggleFilterVisibility();
     }
 
+	/* Submit */
+
+	var info_interval_loading = false;
+
+	function getPlotJobState() {
+
+		const run_tab_index = parseInt(tab_index);
+
+		if(!info_interval_loading && plotly_json[run_tab_index].loading && plotly_json[run_tab_index].pid_id) {
+
+			ajax({
+
+				url: self_.baseDirectoryUrl + 'api/jobstate',
+				data: { pid: plotly_json[run_tab_index].pid_id },
+				beforeSend: function() {
+
+					info_interval_loading = true;
+				},
+				callback: function(res) {
+
+					res = JSON.parse(res);
+					$(".loading_info").text(res.state + ": " + res.msg);
+					info_interval_loading = false;
+				},
+				error: function() {
+
+					info_interval_loading = false;
+				}
+			});
+		}
+	}
+
+
 	var first_run = true;
 	var run_id = 0;
+	var run_cancelled = false;
 
 	function onSubmit() {
 
@@ -771,6 +809,7 @@ export default function analytics(self_) {
 						}
 
 						plotly_json[run_tab_index].run_id = plot_run_id;
+						plotly_json[run_tab_index].pid_id = data.params.pid;
 						plotly_json[run_tab_index].loading = true;
 						plotly_json[run_tab_index].error = false;
 
@@ -781,6 +820,7 @@ export default function analytics(self_) {
 						plotly_json[run_tab_index] = {
 
 							run_id: plot_run_id,
+							pid_id: data.params.pid,
 							loading: true
 						}
 					}
@@ -797,6 +837,10 @@ export default function analytics(self_) {
 
 					loading = true;
 					drawTabs();
+					run_cancelled = false;
+					$(".loading_info").text("Initializing...");
+					plot_state_interval = setInterval(getPlotJobState, 2000);
+
 				},
 				callback: function(res) {
 
@@ -818,8 +862,6 @@ export default function analytics(self_) {
 
 							if(typeof chartData[i].nimi !== "undefined") {
 
-								//let title_inserted = false;
-
 								for(var j = 0; j < chartData[i].plots.length; j += 1) {
 
 									plotly_json[run_tab_index].plots[plotly_ind] = {
@@ -829,18 +871,6 @@ export default function analytics(self_) {
 									plotly_json[run_tab_index].plots[plotly_ind].gd3 = plotly_json[run_tab_index].plots[plotly_ind].d3.select("#chart .chart-area").append('div').style({ width: 100 + '%', height: 80 + 'vh' }).attr("data-index", (plotly_ind+1)).attr("data-run-index", plot_run_id);
 									plotly_json[run_tab_index].plots[plotly_ind].gd  = plotly_json[run_tab_index].plots[plotly_ind].gd3.node();
 									Plotly.plot(plotly_json[run_tab_index].plots[plotly_ind].gd, chartData[i].plots[j]);
-
-									/*if(!title_inserted) {
-
-										var title_elem = document.querySelector("#chart .chart-area div[data-index='" + (plotly_ind + 1)  + "'][data-run-index='" + plot_run_id  + "']");
-										console.log("TITLELELEEEM", title_elem);
-										if(title_elem) {
-
-											title_elem.insertAdjacentHTML("afterbegin", '<h2 class="clinical_title">' + chartData[i].nimi + '</h2>');
-										}
-
-										title_inserted = true;
-									}*/
 
 									plotly_ind += 1;
 
@@ -875,6 +905,7 @@ export default function analytics(self_) {
 					drawTabs();
 					toggleLoading(plotly_json[tab_index].loading);
 					togglePlotVisibility(plotly_json[tab_index].run_id);
+					clearInterval(plot_state_interval);
 
                     setTimeout(() => {
 
@@ -893,15 +924,23 @@ export default function analytics(self_) {
 
                     }, 200);
 				},
-				error: function() {
+				error: function(e) {
 
-					plotly_json[run_tab_index].error = true;
+					console.log(e);
+
+					plotly_json[run_tab_index].error = (run_cancelled) ? false : true;
 					plotly_json[run_tab_index].loading = false;
-					toggleError(true);
+					toggleError((run_cancelled) ? false : true);
 					toggleLoading(plotly_json[tab_index].loading);
 					togglePlotVisibility(plotly_json[tab_index].run_id);
 					drawTabs();
 					loading = false;
+
+					if(run_cancelled) {
+
+						chart.classList.add("run_again");
+						cancelBtn.classList.remove("disabled");
+					}
 				}
 			});
 		}
@@ -955,6 +994,43 @@ export default function analytics(self_) {
 			});
 		}
 	}
+
+	function cancelPlotJob(e) {
+
+		e.preventDefault();
+
+		const run_tab_index = parseInt(tab_index);
+
+		if(plotly_json[run_tab_index].loading && plotly_json[run_tab_index].pid_id) {
+
+			run_cancelled = true;
+
+			ajax({
+
+				url: self_.baseDirectoryUrl + 'api/canceljob',
+				data: { pid: plotly_json[run_tab_index].pid_id },
+				beforeSend: function() { cancelBtn.classList.add("disabled") },
+				callback: function(res) {
+
+					/*plotly_json[run_tab_index].error = false;
+					plotly_json[run_tab_index].loading = false;
+					toggleError(false);
+					toggleLoading(plotly_json[tab_index].loading);
+					togglePlotVisibility(plotly_json[tab_index].run_id);
+					drawTabs();
+					loading = false;*/
+
+				},
+				error: function() {
+
+					cancelBtn.classList.remove("disabled");
+				}
+			});
+
+		}
+	}
+
+	cancelBtn.addEventListener(clickEvent, cancelPlotJob);
 
 	function toggleError(err) {
 
@@ -1406,7 +1482,7 @@ export default function analytics(self_) {
       } else {
 				$(".fl[data-name='label_ellipses']").parent().addClass("hidden");
       }
-      
+
     }
 
 		/* Symbol visibilities */

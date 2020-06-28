@@ -160,19 +160,19 @@ $analysis = new EndometDBAnalysis();
 
             </div>
 
-        <div class="chart_settings_filter hidden" data-type="heatmap">
-            <div class="fl checkbox" data-name="cluster_heatmap">
-                <figure><i class="fa fa-check"></i></figure>Cluster heatmap
+            <div class="chart_settings_filter hidden" data-type="heatmap">
+                <div class="fl checkbox" data-name="cluster_heatmap">
+                    <figure><i class="fa fa-check"></i></figure>Cluster heatmap
+                </div>
             </div>
-        </div>
 
 			<div class="chart_settings_filter hidden" data-type="heatmap|mds">
 
-				<div class="chart_settings_filter hidden" data-type="heatmap">
-            <div class="fl checkbox checked" data-name="expand-legend-acronyms">
-                  <figure><i class="fa fa-check"></i></figure>Expand legend acronyms
-            </div>
-        </div>
+                <div class="chart_settings_filter hidden" data-type="heatmap">
+                    <div class="fl checkbox checked" data-name="expand-legend-acronyms">
+                        <figure><i class="fa fa-check"></i></figure>Expand legend acronyms
+                    </div>
+                </div>
 
 				<label> Distance Metric </label>
 
@@ -239,26 +239,27 @@ $analysis = new EndometDBAnalysis();
 			</div>
 
 			<div class="chart_settings_filter hidden" data-type="pca">
-          <div class="fl checkbox" data-name="show_ellipses">
-              <figure><i class="fa fa-check"></i></figure>Show 95% confidence ellipses
-          </div>
-      </div>
-			<div class="chart_settings_filter hidden" data-type="">
-          <div class="fl checkbox checked" data-name="label_ellipses">
-              <figure><i class="fa fa-check"></i></figure>Label 95% confidence ellipses
-          </div>
-      </div>
+                <div class="fl checkbox" data-name="show_ellipses">
+                    <figure><i class="fa fa-check"></i></figure>Show 95% confidence ellipses
+                </div>
+            </div>
+
+            <div class="chart_settings_filter hidden" data-type="">
+                <div class="fl checkbox checked" data-name="label_ellipses">
+                    <figure><i class="fa fa-check"></i></figure>Label 95% confidence ellipses
+                </div>
+            </div>
 
 			<div class="chart_settings_filter hidden" data-type="heatmap|correlation">
 
 				<label> Color spectrum </label>
 
 				<div class="fl gradients" data-name="spectrum">
-          <figure data-value="RbG"></figure>
-					<figure class="selected" data-value="RwB"></figure>
-					<figure data-value="RdBu"></figure>
-					<figure data-value="Spectral"></figure>
-					<figure data-value="OrRd"></figure>
+                    <figure data-value="RbG"></figure>
+                    <figure class="selected" data-value="RwB"></figure>
+                    <figure data-value="RdBu"></figure>
+                    <figure data-value="Spectral"></figure>
+                    <figure data-value="OrRd"></figure>
 				</div>
 
 			</div>
@@ -286,6 +287,9 @@ $analysis = new EndometDBAnalysis();
         <div class="particle grey other-particle"></div>
         <div class="particle blue other-other-particle"></div>
     </div>
+
+    <p class="loading_info"></p>
+    <button class="btn green icon left fa-times" id="cancel_plot"> Cancel </button>
 
     <div class="stillSpinParticleContainer">
         <div class="particle red"></div>
